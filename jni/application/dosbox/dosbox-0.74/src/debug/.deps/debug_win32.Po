@@ -1,0 +1,4 @@
+debug_win32.o: debug_win32.cpp \
+ /home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h
+
+/home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h:

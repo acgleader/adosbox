@@ -1,0 +1,24 @@
+vga_dac.o: vga_dac.cpp \
+ /home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h \
+ ../../include/dosbox.h ../../config.h ../../include/logging.h \
+ ../../include/inout.h ../../include/render.h \
+ ../../include/../src/gui/render_scalers.h ../../include/video.h \
+ ../../include/vga.h
+
+/home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h:
+
+../../include/dosbox.h:
+
+../../config.h:
+
+../../include/logging.h:
+
+../../include/inout.h:
+
+../../include/render.h:
+
+../../include/../src/gui/render_scalers.h:
+
+../../include/video.h:
+
+../../include/vga.h:

@@ -1,0 +1,308 @@
+memory.o: memory.cpp \
+ /home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h \
+ ../../include/dosbox.h ../../config.h ../../include/logging.h \
+ ../../include/mem.h ../../include/inout.h ../../include/setup.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/list \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_algobase.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/c++config.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/os_defines.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/cpu_defines.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cstddef \
+ /home/taohuang/program/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/functexcept.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/exception_defines.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/cpp_type_traits.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/type_traits.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/numeric_traits.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_pair.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/move.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/concept_check.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_iterator_base_types.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_iterator_base_funcs.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_iterator.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/debug/debug.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/allocator.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/c++allocator.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/new_allocator.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/new \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/exception \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_list.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/initializer_list \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/list.tcc \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/vector \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_construct.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_uninitialized.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_vector.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_bvector.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/vector.tcc \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/string \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stringfwd.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/char_traits.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/postypes.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cwchar \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/wchar.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdio.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/_types.h \
+ /home/taohuang/program/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stdarg.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdint.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/time.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/time.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/time.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/siginfo.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/malloc.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/localefwd.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/c++locale.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/clocale \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/locale.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/iosfwd \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cctype \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/ctype.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/ostream_insert.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cxxabi-forced.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_function.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/backward/binders.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/basic_string.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/atomicity.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/gthr.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/gthr-default.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/pthread.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/signal.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/limits.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/limits.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/limits.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/internal_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/limits.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/syslimits.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/string.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/signal.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm-generic/signal.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sched.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/unistd.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/select.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/sysconf.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/capability.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/pathconf.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/atomic_word.h \
+ /home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/basic_string.tcc \
+ ../../include/paging.h ../../include/regs.h
+
+/home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h:
+
+../../include/dosbox.h:
+
+../../config.h:
+
+../../include/logging.h:
+
+../../include/mem.h:
+
+../../include/inout.h:
+
+../../include/setup.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/list:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_algobase.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/c++config.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/os_defines.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/cpu_defines.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cstddef:
+
+/home/taohuang/program/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/functexcept.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/exception_defines.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/cpp_type_traits.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/type_traits.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/numeric_traits.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_pair.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/move.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/concept_check.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_iterator_base_types.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_iterator_base_funcs.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_iterator.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/debug/debug.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/allocator.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/c++allocator.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/new_allocator.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/new:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/exception:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_list.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/initializer_list:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/list.tcc:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/vector:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_construct.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_uninitialized.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_vector.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_bvector.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/vector.tcc:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/string:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stringfwd.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/char_traits.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/postypes.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cwchar:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/wchar.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdio.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/_types.h:
+
+/home/taohuang/program/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stdarg.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdint.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/time.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/time.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/time.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/siginfo.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm-generic/siginfo.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/malloc.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/localefwd.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/c++locale.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/clocale:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/locale.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/iosfwd:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cctype:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/ctype.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/ostream_insert.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/cxxabi-forced.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/stl_function.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/backward/binders.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/basic_string.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/ext/atomicity.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/gthr.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/gthr-default.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/pthread.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/signal.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/limits.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/limits.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/limits.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/internal_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/limits.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/syslimits.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/string.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/signal.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm-generic/signal.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sched.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/unistd.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/select.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/sysconf.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/capability.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/pathconf.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include/bits/atomic_word.h:
+
+/home/taohuang/program/android-ndk-r5b/sources/cxx-stl/gnu-libstdc++/include/bits/basic_string.tcc:
+
+../../include/paging.h:
+
+../../include/regs.h:

@@ -1,0 +1,93 @@
+vga_crtc.o: vga_crtc.cpp \
+ /home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdlib.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h \
+ /home/taohuang/program/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/string.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/malloc.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/alloca.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/strings.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdint.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/posix_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/stddef.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/compiler.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/posix_types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/types.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/kernel.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h \
+ /home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/memory.h \
+ ../../include/dosbox.h ../../config.h ../../include/logging.h \
+ ../../include/inout.h ../../include/vga.h ../../include/debug.h \
+ ../../include/cpu.h ../../include/regs.h ../../include/mem.h \
+ ../../include/video.h ../../include/pic.h
+
+/home/taohuang/program/pelya-commandergenius-a7cf867/project/jni/application/../sdl_fake_stdout/include/SDL_android_printf.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdlib.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/cdefs_elf.h:
+
+/home/taohuang/program/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/include/stddef.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/string.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/malloc.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/alloca.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/strings.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/stdint.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/posix_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/stddef.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/compiler.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/posix_types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/asm/types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/linux/types.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/machine/kernel.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/sys/sysmacros.h:
+
+/home/taohuang/program/android-ndk-r5b/platforms/android-8/arch-arm/usr/include/memory.h:
+
+../../include/dosbox.h:
+
+../../config.h:
+
+../../include/logging.h:
+
+../../include/inout.h:
+
+../../include/vga.h:
+
+../../include/debug.h:
+
+../../include/cpu.h:
+
+../../include/regs.h:
+
+../../include/mem.h:
+
+../../include/video.h:
+
+../../include/pic.h:
