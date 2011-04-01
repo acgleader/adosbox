@@ -2150,11 +2150,11 @@ class Settings
 
 			if( Globals.TouchscreenKeyboardTheme == 0 )
 			{
-//				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.ultimatedroid));
+				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.ultimatedroid));
 			}
 			if( Globals.TouchscreenKeyboardTheme == 1 )
 			{
-//				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.simpletheme));
+				nativeSetupScreenKeyboardButtons(loadRaw(p, R.raw.simpletheme));
 			}
 		}
 	}
