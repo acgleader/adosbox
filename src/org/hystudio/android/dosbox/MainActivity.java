@@ -217,6 +217,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() 
 	{
+		mgr.hideSoftInputFromWindow(mGLView.getWindowToken(), 0);
+		
 		if( downloader != null ) {
 			synchronized( downloader ) {
 				downloader.setStatusField(null);
