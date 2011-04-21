@@ -165,9 +165,9 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
-		if(_screenKeyboard != null)
+		if(_screenKeyboard != null) {
 			_screenKeyboard.onKeyUp(keyCode, event);
-		else
+		} else
 		if( mGLView != null )
 			mGLView.nativeKey( keyCode, 0 );
 		return true;

@@ -114,9 +114,45 @@ class Settings
 			out.close();
 			settingsLoaded = true;
 			
+			dynamicAdjust(p);
 		} catch( FileNotFoundException e ) {
 		} catch( SecurityException e ) {
 		} catch ( IOException e ) {};
+	}
+	
+	/**
+	 * This function dynamically adjust system based on runtime user configuration.
+	 * Note: some configuration modification requires restart of the app.
+	 * Currently, arrow keys are supported. 
+	 */
+	static void dynamicAdjust (Activity p) {
+        if( Globals.UseTouchscreenKeyboard )
+           {
+               boolean screenKbReallyUsed = false;
+               for( int i = 0; i < Globals.ScreenKbControlsShown.length; i++ )
+                   if( Globals.ScreenKbControlsShown[i] )
+                       screenKbReallyUsed = true;
+               if( screenKbReallyUsed )
+               {
+                   nativeSetTouchscreenKeyboardUsed();
+                   nativeSetupScreenKeyboard(  Globals.TouchscreenKeyboardSize,
+                                               Globals.TouchscreenKeyboardTheme,
+                                               Globals.AppTouchscreenKeyboardKeysAmountAutoFire,
+                                               Globals.TouchscreenKeyboardTransparency );
+                   SetupTouchscreenKeyboardGraphics(p);
+                   for( int i = 0; i < Globals.ScreenKbControlsShown.length; i++ )
+                       nativeSetScreenKbKeyUsed(i, Globals.ScreenKbControlsShown[i] ? 1 : 0);
+                   for( int i = 0; i < Globals.RemapScreenKbKeycode.length; i++ )
+                       nativeSetKeymapKeyScreenKb(i, SDL_Keys.values[Globals.RemapScreenKbKeycode[i]]);
+                   for( int i = 0; i < Globals.ScreenKbControlsLayout.length; i++ )
+                       if( Globals.ScreenKbControlsLayout[i][0] < Globals.ScreenKbControlsLayout[i][2] )
+                           nativeSetScreenKbKeyLayout( i, Globals.ScreenKbControlsLayout[i][0], Globals.ScreenKbControlsLayout[i][1],
+                               Globals.ScreenKbControlsLayout[i][2], Globals.ScreenKbControlsLayout[i][3]);
+               }
+               else
+                   Globals.UseTouchscreenKeyboard = false;
+           }
+
 	}
 
 	static void Load( final MainActivity p )
