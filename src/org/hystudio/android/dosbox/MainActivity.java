@@ -18,18 +18,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,51 +38,11 @@ public class MainActivity extends Activity {
 //            Globals.DownloadToSdcard = false;
 //        }
                 
-		// fullscreen mode
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		if(Globals.InhibitSuspend)
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 					WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-		System.out.println("libSDL: Creating startup screen");
-		_layout = new LinearLayout(this);
-		_layout.setOrientation(LinearLayout.VERTICAL);
-		_layout.setLayoutParams(new LinearLayout.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		_layout2 = new LinearLayout(this);
-		_layout2.setLayoutParams(new LinearLayout.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-		_btn = new Button(this);
-		_btn.setLayoutParams(new ViewGroup.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-		_btn.setText(getResources().getString(R.string.device_change_cfg));
-		class onClickListener implements View.OnClickListener
-		{
-				public MainActivity p;
-				onClickListener( MainActivity _p ) { p = _p; }
-				public void onClick(View v)
-				{
-					setUpStatusLabel();
-					System.out.println("libSDL: User clicked change phone config button");
-					Settings.showConfig(p);
-				}
-		};
-		_btn.setOnClickListener(new onClickListener(this));
-
-		_layout2.addView(_btn);
-
-		_layout.addView(_layout2);
 		
-		ImageView img = new ImageView(this);
-
-		img.setScaleType(ImageView.ScaleType.FIT_CENTER /* FIT_XY */ );
-		img.setImageResource(R.drawable.publisherlogo);
-		img.setLayoutParams(new ViewGroup.LayoutParams( ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		_layout.addView(img);
-		
-		_videoLayout = new FrameLayout(this);
-		_videoLayout.addView(_layout);
-		
+		initSDL();
 		setContentView(_videoLayout);
 
 		if(mAudioThread == null) // Starting from background (should not happen)
@@ -98,31 +53,12 @@ public class MainActivity extends Activity {
 			System.out.println("libSDL: Loading settings");
 			Settings.Load(this);
 		}
-
-		if( !Settings.settingsChanged )
-		{
-			System.out.println("libSDL: 3-second timeout in startup screen");
-			class Callback implements Runnable
-			{
-				MainActivity p;
-				Callback( MainActivity _p ) { p = _p; }
-				public void run()
-				{
-					try {
-						Thread.sleep(3000);
-					} catch( InterruptedException e ) {};
-					if( Settings.settingsChanged )
-						return;
-					System.out.println("libSDL: Timeout reached in startup screen, process with downloader");
-					p.startDownloader();
-				}
-			};
-			Thread changeConfigAlertThread = null;
-			changeConfigAlertThread = new Thread(new Callback(this));
-			changeConfigAlertThread.start();
-		}
 		
 		mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+	}
+	
+	public void showSDLSettings() {
+		Settings.showConfig(this);
 	}
 	
 	public void setUpStatusLabel()
@@ -133,7 +69,7 @@ public class MainActivity extends Activity {
 			Parent._layout2.removeView(Parent._btn);
 			Parent._btn = null;
 		}
-		if( Parent._tv == null )
+		if( Parent._layout2 != null && Parent._tv == null )
 		{
 			Parent._tv = new TextView(Parent);
 			Parent._tv.setMaxLines(1);
@@ -142,26 +78,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	public void startDownloader()
-	{
-		System.out.println("libSDL: Starting data downloader");
-		class Callback implements Runnable
-		{
-			public MainActivity Parent;
-			public void run()
-			{
-				setUpStatusLabel();
-				System.out.println("libSDL: Starting downloader");
-				if( Parent.downloader == null )
-					Parent.downloader = new DataDownloader(Parent, Parent._tv);
-			}
-		}
-		Callback cb = new Callback();
-		cb.Parent = this;
-		this.runOnUiThread(cb);
-	}
-
-	public void initSDL()
+	private void initSDL()
 	{
 		if(sdlInited)
 			return;
@@ -170,11 +87,6 @@ public class MainActivity extends Activity {
 		if(Globals.UseAccelerometerAsArrowKeys)
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 					WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		_videoLayout.removeView(_layout);
-		_layout = null;
-		_layout2 = null;
-		_btn = null;
-		_tv = null;
 		_videoLayout = new FrameLayout(this);
 		setContentView(_videoLayout);
 		mGLView = new DemoGLSurfaceView(this);
@@ -187,11 +99,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onPause() {
-		if( downloader != null ) {
-			synchronized( downloader ) {
-				downloader.setStatusField(null);
-			}
-		}
 		_isPaused = true;
 		if( mGLView != null )
 			mGLView.onPause();
@@ -203,14 +110,7 @@ public class MainActivity extends Activity {
 		super.onResume();
 		if( mGLView != null )
 			mGLView.onResume();
-		else
-		if( downloader != null ) {
-			synchronized( downloader ) {
-				downloader.setStatusField(_tv);
-				if( downloader.DownloadComplete )
-					initSDL();
-			}
-		}
+
 		_isPaused = false;
 	}
 	
@@ -223,39 +123,12 @@ public class MainActivity extends Activity {
 	protected void onDestroy() 
 	{
 		mgr.hideSoftInputFromWindow(mGLView.getWindowToken(), 0);
-		
-		if( downloader != null ) {
-			synchronized( downloader ) {
-				downloader.setStatusField(null);
-			}
-		}
 		if( mGLView != null )
 			mGLView.exitApp();
 		super.onDestroy();
 		System.exit(0);
 	}
 
-	public void hideScreenKeyboard()
-	{
-		if(_screenKeyboard == null)
-			return;
-
-		synchronized(textInput)
-		{
-			String text = _screenKeyboard.getText().toString();
-			for(int i = 0; i < text.length(); i++)
-			{
-				DemoRenderer.nativeTextInput( (int)text.charAt(i), (int)text.codePointAt(i) );
-			}
-		}
-		DemoRenderer.nativeTextInputFinished();
-		_videoLayout.removeView(_screenKeyboard);
-		_screenKeyboard = null;
-		mGLView.setFocusableInTouchMode(true);
-		mGLView.setFocusable(true);
-		mGLView.requestFocus();
-	};
-	
 	private InputMethodManager mgr;
 	private boolean softKeyboardVisible;
 	
@@ -270,48 +143,6 @@ public class MainActivity extends Activity {
 			mGLView.requestFocus();
 		}
 		softKeyboardVisible = !softKeyboardVisible;
-		
-//		if(_screenKeyboard != null)
-//			return;
-//		class myKeyListener implements OnKeyListener 
-//		{
-//			MainActivity _parent;
-//			boolean sendBackspace;
-//			myKeyListener(MainActivity parent, boolean sendBackspace) { _parent = parent; this.sendBackspace = sendBackspace; };
-//			public boolean onKey(View v, int keyCode, KeyEvent event) 
-//			{
-//				if ((event.getAction() == KeyEvent.ACTION_UP) && ((keyCode == KeyEvent.KEYCODE_ENTER) || (keyCode == KeyEvent.KEYCODE_BACK)))
-//				{
-//					_parent.hideScreenKeyboard();
-//					return true;
-//				}
-//				if ((sendBackspace && event.getAction() == KeyEvent.ACTION_UP) && (keyCode == KeyEvent.KEYCODE_DEL || keyCode == KeyEvent.KEYCODE_CLEAR))
-//				{
-//					synchronized(textInput) {
-//						DemoRenderer.nativeTextInput( 8, 0 ); // Send backspace to native code
-//					}
-//					return false; // and proceed to delete text in keyboard input field
-//				}
-//				return false;
-//			}
-//		};
-//		_screenKeyboard = new EditText(this);
-//		_videoLayout.addView(_screenKeyboard);
-//		_screenKeyboard.setOnKeyListener(new myKeyListener(this, sendBackspace));
-//		_screenKeyboard.setHint(R.string.text_edit_click_here);
-//		_screenKeyboard.setText(oldText);
-//		final Window window = getWindow();
-//		_screenKeyboard.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//			public void onFocusChange(View v, boolean hasFocus)
-//			{
-//				if (hasFocus)
-//					window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//			}
-//		});
-//		_screenKeyboard.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.NONE, false));
-//		_screenKeyboard.setFocusableInTouchMode(true);
-//		_screenKeyboard.setFocusable(true);
-//		_screenKeyboard.requestFocus();
 	};
 
 	@Override
@@ -322,14 +153,6 @@ public class MainActivity extends Activity {
 		else
 		if( mGLView != null )
 			 mGLView.nativeKey( keyCode, 1 );
-		else
-		if( keyCode == KeyEvent.KEYCODE_BACK && downloader != null )
-		{ 
-			if( downloader.DownloadFailed )
-				System.exit(1);
-			if( !downloader.DownloadComplete )
-			 onStop();
-		}
 		else
 		if( keyListener != null )
 		{
@@ -509,7 +332,6 @@ public class MainActivity extends Activity {
 
 	private static DemoGLSurfaceView mGLView = null;
 	private static AudioThread mAudioThread = null;
-	private static DataDownloader downloader = null;
 
 	private TextView _tv = null;
 	private Button _btn = null;

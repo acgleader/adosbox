@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 // TODO: too much code here, split into multiple files, possibly auto-generated menus?
@@ -38,7 +39,7 @@ class Settings
 	static void Save(final MainActivity p)
 	{
 		try {
-			ObjectOutputStream out = new ObjectOutputStream(p.openFileOutput( SettingsFileName, p.MODE_WORLD_READABLE ));
+			ObjectOutputStream out = new ObjectOutputStream(p.openFileOutput( SettingsFileName, Activity.MODE_WORLD_READABLE ));
 			out.writeInt(SETTINGS_FILE_VERSION);
 			out.writeBoolean(Globals.DownloadToSdcard);
 			out.writeBoolean(Globals.PhoneHasArrowKeys);
@@ -344,8 +345,6 @@ class Settings
 
 		items.add(p.getResources().getString(R.string.video));
 
-		items.add(p.getResources().getString(R.string.ok));
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(p);
 		builder.setTitle(p.getResources().getString(R.string.device_config));
 		//builder.setSingleChoiceItems(items.toArray(new CharSequence[0]), MainMenuLastSelected, new DialogInterface.OnClickListener() 
@@ -412,24 +411,18 @@ class Settings
 				if( item == selected )
 					showVideoSettingsConfig(p);
 				selected++;
-
-				if( item == selected )
-				{
-					Save(p);
-					p.startDownloader();
-				}
-			}
-		});
-		builder.setOnCancelListener(new DialogInterface.OnCancelListener()
-		{
-			public void onCancel(DialogInterface dialog)
-			{
-				Save(p);
-				p.startDownloader();
 			}
 		});
 		AlertDialog alert = builder.create();
 		alert.setOwnerActivity(p);
+		alert.setButton(p.getString(R.string.ok),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Save(p);
+						Toast t = Toast.makeText(p, "Please restart aDosbox to make your modifications effective if there is any!", 2000);
+						t.show();
+					}
+				});
 		alert.show();
 	}
 

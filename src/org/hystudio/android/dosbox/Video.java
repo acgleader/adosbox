@@ -222,8 +222,8 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 																				// from
 																				// native
 																				// code
-		System.exit(0); // The main() returns here - I don't bother with deinit
-						// stuff, just terminate process
+		
+		context.onDestroy();
 	}
 
 	public int swapBuffers() // Called from native code
@@ -357,14 +357,16 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	public boolean onKeyDown(int keyCode, final KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU)
 			mParent.showScreenKeyboard("", false);
-		else
+		else if (keyCode == KeyEvent.KEYCODE_SEARCH)
+			mParent.showSDLSettings();
+		else 
 			nativeKey(keyCode, 1);
 		return true;
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
-		if (keyCode != KeyEvent.KEYCODE_MENU)
+		if (keyCode != KeyEvent.KEYCODE_MENU && keyCode != KeyEvent.KEYCODE_SEARCH)
 			nativeKey(keyCode, 0);
 		return true;
 	}
