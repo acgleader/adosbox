@@ -165,6 +165,9 @@ class Settings
 			if( settingsFile.readInt() != SETTINGS_FILE_VERSION )
 				throw new IOException();
 			Globals.DownloadToSdcard = settingsFile.readBoolean();
+			if (!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+	            Globals.DownloadToSdcard = false;
+	        }
 			Globals.PhoneHasArrowKeys = settingsFile.readBoolean();
 			Globals.PhoneHasTrackball = settingsFile.readBoolean();
 			Globals.UseAccelerometerAsArrowKeys = settingsFile.readBoolean();

@@ -31,7 +31,7 @@ class Globals {
 	
 	public static boolean AppNeedsTwoButtonMouse = true;
 
-	public static boolean AppNeedsArrowKeys = false;
+	public static boolean AppNeedsArrowKeys = true;
 
 	public static boolean AppNeedsTextInput = true;
 
@@ -48,7 +48,8 @@ class Globals {
 	public static int AppTouchscreenKeyboardKeysAmountAutoFire = 0;
 
 	// Phone-specific config, TODO: move this to settings
-	public static boolean DownloadToSdcard = true;
+	public static boolean DownloadToSdcard = false;
+	
 	public static boolean PhoneHasTrackball = false;
 	public static boolean PhoneHasArrowKeys = false;
 	public static boolean UseAccelerometerAsArrowKeys = false;
