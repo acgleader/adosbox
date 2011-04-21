@@ -37,6 +37,8 @@ public class MainActivity extends Activity {
 //        if (!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
 //            Globals.DownloadToSdcard = false;
 //        }
+		
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 
 		if(Globals.InhibitSuspend)
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
