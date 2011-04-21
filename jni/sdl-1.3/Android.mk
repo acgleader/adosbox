@@ -9,7 +9,7 @@ $(error Please define SDL_JAVA_PACKAGE_PATH to the path of your Java package wit
 endif
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
-LOCAL_CFLAGS := -O3 \
+LOCAL_CFLAGS := -O3 -Os -march=armv6j -mtune=arm1136jf-s\
 	-DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) \
 	-DSDL_CURDIR_PATH=\"$(SDL_CURDIR_PATH)\" \
 	-DSDL_TRACKBALL_KEYUP_DELAY=$(SDL_TRACKBALL_KEYUP_DELAY) \
