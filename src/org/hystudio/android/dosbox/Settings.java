@@ -129,6 +129,13 @@ class Settings
 	static void dynamicAdjust (Activity p) {
         if( Globals.UseTouchscreenKeyboard )
            {
+               if (MainActivity.mGLView != null && MainActivity.mGLView.mRenderer != null) {
+                   MainActivity.mGLView.mRenderer.accelerometer.reconfig(p);
+               }
+               if( Globals.AppUsesJoystick && (Globals.UseAccelerometerAsArrowKeys || Globals.UseTouchscreenKeyboard) )
+                   nativeSetJoystickUsed();
+               
+                
                boolean screenKbReallyUsed = false;
                for( int i = 0; i < Globals.ScreenKbControlsShown.length; i++ )
                    if( Globals.ScreenKbControlsShown[i] )

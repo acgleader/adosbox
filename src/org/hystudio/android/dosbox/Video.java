@@ -287,7 +287,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	public static native void nativeTextInputFinished();
 
 	private MainActivity context = null;
-	private AccelerometerReader accelerometer = null;
+	public AccelerometerReader accelerometer = null;
 
 	private EGL10 mEgl = null;
 	private EGLDisplay mEglDisplay = null;
@@ -386,7 +386,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 		return true;
 	}
 
-	DemoRenderer mRenderer;
+	public DemoRenderer mRenderer;
 	MainActivity mParent;
 	DifferentTouchInput touchInput = null;
 

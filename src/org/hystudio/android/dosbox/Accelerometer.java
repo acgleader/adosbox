@@ -13,19 +13,24 @@ class AccelerometerReader implements SensorEventListener {
 
 	public AccelerometerReader(Activity context) {
 		System.out.println("libSDL: accelerometer start required: " + String.valueOf(Globals.UseAccelerometerAsArrowKeys));
-		if( Globals.UseAccelerometerAsArrowKeys )
-		{
-			_manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-			if( _manager != null )
-			{
-				System.out.println("libSDL: starting accelerometer");
-				// TODO: orientation allows for 3rd axis - azimuth, but it will be way too hard to the user
-				// if( ! _manager.registerListener(this, _manager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME) )
-				_manager.registerListener(this, _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
-			}
-		}
+		reconfig(context);
 	}
 	
+	public synchronized void reconfig (Context context) {
+	    if( Globals.UseAccelerometerAsArrowKeys )
+        {
+            _manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            if( _manager != null )
+            {
+                System.out.println("libSDL: starting accelerometer");
+                // TODO: orientation allows for 3rd axis - azimuth, but it will be way too hard to the user
+                // if( ! _manager.registerListener(this, _manager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_GAME) )
+                _manager.registerListener(this, _manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
+            }
+        } else {
+            stop();
+        }
+	}
 	public synchronized void stop() {
 		if( _manager != null )
 		{

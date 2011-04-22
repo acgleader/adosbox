@@ -348,7 +348,7 @@ public class MainActivity extends Activity {
 
 	static int NOTIFY_ID = 12367098; // Random ID
 
-	private static DemoGLSurfaceView mGLView = null;
+	public static DemoGLSurfaceView mGLView = null;
 	private static AudioThread mAudioThread = null;
 
 	private TextView _tv = null;
