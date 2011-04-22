@@ -1,7 +1,9 @@
 package org.hystudio.android.dosbox;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -24,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 // TODO: too much code here, split into multiple files, possibly auto-generated menus?
@@ -107,9 +108,9 @@ class Settings
 			out.writeInt(Globals.RelativeMouseMovementAccel);
 			out.writeBoolean(Globals.MultiThreadedVideo);
 
-			out.writeInt(Globals.OptionalDataDownload.length);
-			for(int i = 0; i < Globals.OptionalDataDownload.length; i++)
-				out.writeBoolean(Globals.OptionalDataDownload[i]);
+//			out.writeInt(Globals.OptionalDataDownload.length);
+//			for(int i = 0; i < Globals.OptionalDataDownload.length; i++)
+//				out.writeBoolean(Globals.OptionalDataDownload[i]);
 
 			out.close();
 			settingsLoaded = true;
@@ -154,51 +155,10 @@ class Settings
            }
 
 	}
-
-	static void Load( final MainActivity p )
-	{
-		if(settingsLoaded) // Prevent starting twice
-		{
-			return;
-		}
-		System.out.println("libSDL: Settings.Load(): enter");
-		nativeInitKeymap();
-		for( int i = 0; i < SDL_Keys.JAVA_KEYCODE_LAST; i++ )
-		{
-			int sdlKey = nativeGetKeymapKey(i);
-			int idx = 0;
-			for(int ii = 0; ii < SDL_Keys.values.length; ii++)
-				if(SDL_Keys.values[ii] == sdlKey)
-					idx = ii;
-			Globals.RemapHwKeycode[i] = idx;
-		}
-		for( int i = 0; i < Globals.RemapScreenKbKeycode.length; i++ )
-		{
-			int sdlKey = nativeGetKeymapKeyScreenKb(i);
-			int idx = 0;
-			for(int ii = 0; ii < SDL_Keys.values.length; ii++)
-				if(SDL_Keys.values[ii] == sdlKey)
-					idx = ii;
-			Globals.RemapScreenKbKeycode[i] = idx;
-		}
-		Globals.ScreenKbControlsShown[0] = Globals.AppNeedsArrowKeys;
-		Globals.ScreenKbControlsShown[1] = Globals.AppNeedsTextInput;
-		for( int i = 2; i < Globals.ScreenKbControlsShown.length; i++ )
-			Globals.ScreenKbControlsShown[i] = ( i - 2 < Globals.AppTouchscreenKeyboardKeysAmount );
-		for( int i = 0; i < Globals.RemapMultitouchGestureKeycode.length; i++ )
-		{
-			int sdlKey = nativeGetKeymapKeyMultitouchGesture(i);
-			int idx = 0;
-			for(int ii = 0; ii < SDL_Keys.values.length; ii++)
-				if(SDL_Keys.values[ii] == sdlKey)
-					idx = ii;
-			Globals.RemapMultitouchGestureKeycode[i] = idx;
-		}
-		for( int i = 0; i < Globals.MultitouchGesturesUsed.length; i++ )
-			Globals.MultitouchGesturesUsed[i] = true;
-
+	
+	static void Load2( final MainActivity p ) {
 		try {
-			ObjectInputStream settingsFile = new ObjectInputStream(new FileInputStream( p.getFilesDir().getAbsolutePath() + "/" + SettingsFileName ));
+			ObjectInputStream settingsFile = new ObjectInputStream(new FileInputStream(p.getFilesDir().getAbsolutePath() + "/" + SettingsFileName));
 			if( settingsFile.readInt() != SETTINGS_FILE_VERSION )
 				throw new IOException();
 			Globals.DownloadToSdcard = settingsFile.readBoolean();
@@ -280,72 +240,103 @@ class Settings
 			Globals.RelativeMouseMovementAccel = settingsFile.readInt();
 			Globals.MultiThreadedVideo = settingsFile.readBoolean();
 
-			Globals.OptionalDataDownload = new boolean[settingsFile.readInt()];
-			for(int i = 0; i < Globals.OptionalDataDownload.length; i++)
-				Globals.OptionalDataDownload[i] = settingsFile.readBoolean();
+//			Globals.OptionalDataDownload = new boolean[settingsFile.readInt()];
+//			for(int i = 0; i < Globals.OptionalDataDownload.length; i++)
+//				Globals.OptionalDataDownload[i] = settingsFile.readBoolean();
 			
 			settingsLoaded = true;
 
 			System.out.println("libSDL: Settings.Load(): loaded settings successfully");
-			
+			p.startDosBox(true);
 			return;
-			
 		} catch( FileNotFoundException e ) {
 		} catch( SecurityException e ) {
 		} catch ( IOException e ) {};
-		
-		if( Globals.DataDir.length() == 0 )
-			Globals.DataDir = Globals.DownloadToSdcard ?
-								Environment.getExternalStorageDirectory().getAbsolutePath() + "/app-data/" + Globals.class.getPackage().getName() :
-								p.getFilesDir().getAbsolutePath();
-		
-		// This code fails for both of my phones!
-		/*
-		Configuration c = new Configuration();
-		c.setToDefaults();
-		
-		if( c.navigation == Configuration.NAVIGATION_TRACKBALL || 
-			c.navigation == Configuration.NAVIGATION_DPAD ||
-			c.navigation == Configuration.NAVIGATION_WHEEL )
+	}
+	
+	static void Load( final MainActivity p )
+	{
+		if(settingsLoaded) // Prevent starting twice
 		{
-			Globals.AppNeedsArrowKeys = false;
+			return;
 		}
-		
-		System.out.println( "libSDL: Phone keypad type: " + 
-				(
-				c.navigation == Configuration.NAVIGATION_TRACKBALL ? "Trackball" :
-				c.navigation == Configuration.NAVIGATION_DPAD ? "Dpad" :
-				c.navigation == Configuration.NAVIGATION_WHEEL ? "Wheel" :
-				c.navigation == Configuration.NAVIGATION_NONAV ? "None" :
-				"Unknown" ) );
-		*/
+			
+		System.out.println("libSDL: Settings.Load(): enter");
+		nativeInitKeymap();
+		for( int i = 0; i < SDL_Keys.JAVA_KEYCODE_LAST; i++ )
+		{
+			int sdlKey = nativeGetKeymapKey(i);
+			int idx = 0;
+			for(int ii = 0; ii < SDL_Keys.values.length; ii++)
+				if(SDL_Keys.values[ii] == sdlKey)
+					idx = ii;
+			Globals.RemapHwKeycode[i] = idx;
+		}
+		for( int i = 0; i < Globals.RemapScreenKbKeycode.length; i++ )
+		{
+			int sdlKey = nativeGetKeymapKeyScreenKb(i);
+			int idx = 0;
+			for(int ii = 0; ii < SDL_Keys.values.length; ii++)
+				if(SDL_Keys.values[ii] == sdlKey)
+					idx = ii;
+			Globals.RemapScreenKbKeycode[i] = idx;
+		}
+		Globals.ScreenKbControlsShown[0] = Globals.AppNeedsArrowKeys;
+		Globals.ScreenKbControlsShown[1] = Globals.AppNeedsTextInput;
+		for( int i = 2; i < Globals.ScreenKbControlsShown.length; i++ )
+			Globals.ScreenKbControlsShown[i] = ( i - 2 < Globals.AppTouchscreenKeyboardKeysAmount );
+		for( int i = 0; i < Globals.RemapMultitouchGestureKeycode.length; i++ )
+		{
+			int sdlKey = nativeGetKeymapKeyMultitouchGesture(i);
+			int idx = 0;
+			for(int ii = 0; ii < SDL_Keys.values.length; ii++)
+				if(SDL_Keys.values[ii] == sdlKey)
+					idx = ii;
+			Globals.RemapMultitouchGestureKeycode[i] = idx;
+		}
+		for( int i = 0; i < Globals.MultitouchGesturesUsed.length; i++ )
+			Globals.MultitouchGesturesUsed[i] = true;
 
-		System.out.println("libSDL: Settings.Load(): loading settings failed, running config dialog");
-		p.setUpStatusLabel();
-		showConfig(p);
+		File settingsfile = new File(p.getFilesDir().getAbsolutePath() + "/" + SettingsFileName);
+		if (!settingsfile.exists()) {
+			Globals.DataDir = Globals.DownloadToSdcard ?
+					Environment.getExternalStorageDirectory().getAbsolutePath() + "/app-data/" + Globals.class.getPackage().getName() :
+					p.getFilesDir().getAbsolutePath();
+			writeFileToStorage(p, "dosbox-0.74.conf");
+			writeFileToStorage(p, "mapper-0.74.map");
+			showConfig(p);
+			return;
+		} else
+			Load2(p);							
+	}
+	
+	private static void writeFileToStorage(MainActivity p, String fileName) {
+		try {
+			File dir = new File(Globals.DataDir);
+			if (!dir.exists())
+				dir.mkdir();
+			dir = new File(Globals.DataDir + "/.dosbox/");
+			if (!dir.exists())
+				dir.mkdir();
+			
+			InputStream in = p.getAssets().open(fileName);
+			FileOutputStream out = new FileOutputStream(Globals.DataDir + "/.dosbox/"
+					+ fileName);
+			byte buf[] = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) > 0)
+				out.write(buf, 0, len);
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// ===============================================================================================
 	
 	public static void showConfig(final MainActivity p) {
 		settingsChanged = true;
-
-		if( Globals.OptionalDataDownload == null )
-		{
-			String downloads[] = Globals.DataDownloadUrl.split("\\^");
-			Globals.OptionalDataDownload = new boolean[downloads.length];
-			boolean oldFormat = true;
-			for( int i = 0; i < downloads.length; i++ )
-			{
-				if( downloads[i].indexOf("!") == 0 )
-				{
-					Globals.OptionalDataDownload[i] = true;
-					oldFormat = false;
-				}
-			}
-			if( oldFormat )
-				Globals.OptionalDataDownload[0] = true;
-		}
 
 		showConfigMainMenu(p);
 	}
@@ -451,12 +442,12 @@ class Settings
 		});
 		AlertDialog alert = builder.create();
 		alert.setOwnerActivity(p);
+		alert.setCancelable(false);
 		alert.setButton(p.getString(R.string.ok),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						Save(p);
-						Toast t = Toast.makeText(p, "Please restart aDosbox to make your modifications effective if there is any!", 2000);
-						t.show();
+						p.startDosBox(false);
 					}
 				});
 		alert.show();
@@ -638,6 +629,8 @@ class Settings
 					Globals.DataDir = Globals.DownloadToSdcard ?
 									Environment.getExternalStorageDirectory().getAbsolutePath() + "/app-data/" + Globals.class.getPackage().getName() :
 									p.getFilesDir().getAbsolutePath();
+					writeFileToStorage(p, "dosbox-0.74.conf");
+					writeFileToStorage(p, "mapper-0.74.map");
 					showConfigMainMenu(p);
 				}
 			}
@@ -670,6 +663,8 @@ class Settings
 			public void onClick(DialogInterface dialog, int item) 
 			{
 				Globals.DataDir = edit.getText().toString();
+				writeFileToStorage(p, "dosbox-0.74.conf");
+				writeFileToStorage(p, "mapper-0.74.map");
 				dialog.dismiss();
 				showCommandLineConfig(p);
 			}

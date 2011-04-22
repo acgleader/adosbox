@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -39,14 +40,18 @@ public class MainActivity extends Activity {
 //        }
 		
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                
+
+		setContentView(R.layout.main);
+		
 		if(Globals.InhibitSuspend)
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 					WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		initSDL();
+		mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		
+		_videoLayout = new FrameLayout(this);
 		setContentView(_videoLayout);
-
+		
 		if(mAudioThread == null) // Starting from background (should not happen)
 		{
 			System.out.println("libSDL: Loading libraries");
@@ -54,9 +59,24 @@ public class MainActivity extends Activity {
 			mAudioThread = new AudioThread(this);
 			System.out.println("libSDL: Loading settings");
 			Settings.Load(this);
+
+		}
+	}
+	
+	public void startDosBox(boolean settingsLoaded) {
+		if(sdlInited) {
+			Toast t = Toast.makeText(this, "Please restart aDosbox to make your modifications effective if there is any!", 2000);
+			t.show();
+			return;
 		}
 		
-		mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		if (!settingsLoaded) {
+			Settings.settingsLoaded = false;
+			Settings.Load2(this); // Load settings again
+			return;
+		}
+			
+		initSDL();
 	}
 	
 	public void showSDLSettings() {
@@ -82,15 +102,11 @@ public class MainActivity extends Activity {
 
 	private void initSDL()
 	{
-		if(sdlInited)
-			return;
 		System.out.println("libSDL: Initializing video and SDL application");
 		sdlInited = true;
 		if(Globals.UseAccelerometerAsArrowKeys)
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 					WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		_videoLayout = new FrameLayout(this);
-		setContentView(_videoLayout);
 		mGLView = new DemoGLSurfaceView(this);
 		_videoLayout.addView(mGLView);
 		// Receive keyboard events
@@ -337,7 +353,6 @@ public class MainActivity extends Activity {
 
 	private TextView _tv = null;
 	private Button _btn = null;
-	private LinearLayout _layout = null;
 	private LinearLayout _layout2 = null;
 
 	private FrameLayout _videoLayout = null;
