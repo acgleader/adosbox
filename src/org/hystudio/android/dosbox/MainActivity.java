@@ -65,7 +65,8 @@ public class MainActivity extends Activity {
 	
 	public void startDosBox(boolean settingsLoaded) {
 		if(sdlInited) {
-			Toast t = Toast.makeText(this, "Please restart aDosbox to make your modifications effective if there is any!", 2000);
+//			Toast t = Toast.makeText(this, "Please restart aDosbox to make your modifications effective if there is any!", 2000);
+			Toast t = Toast.makeText(this, "Config changes may require aDosBox restart to take effect!", 2000);
 			t.show();
 			return;
 		}
