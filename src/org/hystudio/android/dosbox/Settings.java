@@ -355,7 +355,7 @@ class Settings
 
 		items.add(p.getResources().getString(R.string.storage_question));
 
-		items.add(p.getResources().getString(R.string.downloads));
+//		items.add(p.getResources().getString(R.string.downloads));
 
 		items.add(p.getResources().getString(R.string.controls_additional));
 
@@ -373,9 +373,9 @@ class Settings
 
 		items.add(p.getResources().getString(R.string.audiobuf_question));
 
-		items.add(p.getResources().getString(R.string.remap_hwkeys));
+//		items.add(p.getResources().getString(R.string.remap_hwkeys));
 
-		items.add(p.getResources().getString(R.string.remap_screenkb_button_gestures));
+//		items.add(p.getResources().getString(R.string.remap_screenkb_button_gestures));
 
 		items.add(p.getResources().getString(R.string.video));
 
@@ -394,9 +394,9 @@ class Settings
 					showDownloadConfig(p);
 				selected++;
 
-				if( item == selected )
-					showOptionalDownloadConfig(p);
-				selected++;
+//				if( item == selected )
+//					showOptionalDownloadConfig(p);
+//				selected++;
 
 				if( item == selected )
 					showAdditionalInputConfig(p);
@@ -434,13 +434,13 @@ class Settings
 					showAudioConfig(p);
 				selected++;
 
-				if( item == selected )
-					showRemapHwKeysConfig(p);
-				selected++;
-
-				if( item == selected )
-					showScreenGesturesConfig(p);
-				selected++;
+//				if( item == selected )
+//					showRemapHwKeysConfig(p);
+//				selected++;
+//
+//				if( item == selected )
+//					showScreenGesturesConfig(p);
+//				selected++;
 
 				if( item == selected )
 					showVideoSettingsConfig(p);
@@ -546,6 +546,8 @@ class Settings
 	static void showScreenKeyboardConfigMainMenu(final MainActivity p)
 	{
 		ArrayList<CharSequence> items = new ArrayList<CharSequence> ();
+		
+		items.add(p.getResources().getString(R.string.remap_screenkb));
 
 		items.add(p.getResources().getString(R.string.controls_screenkb_theme));
 
@@ -553,9 +555,7 @@ class Settings
 
 		items.add(p.getResources().getString(R.string.controls_screenkb_transparency));
 
-		items.add(p.getResources().getString(R.string.remap_screenkb));
-
-		items.add(p.getResources().getString(R.string.screenkb_custom_layout));
+//		items.add(p.getResources().getString(R.string.screenkb_custom_layout));
 
 		items.add(p.getResources().getString(R.string.ok));
 
@@ -569,6 +569,10 @@ class Settings
 				KeyboardConfigMainMenuLastSelected = item;
 				dialog.dismiss();
 				int selected = 0;
+				
+				if( item == selected )
+					showRemapScreenKbConfig(p);
+				selected++;
 
 				if( item == selected )
 					showScreenKeyboardThemeConfig(p);
@@ -582,13 +586,10 @@ class Settings
 					showScreenKeyboardTransparencyConfig(p);
 				selected++;
 
-				if( item == selected )
-					showRemapScreenKbConfig(p);
-				selected++;
 
-				if( item == selected )
-					showCustomizeScreenKbLayout(p);
-				selected++;
+//				if( item == selected )
+//					showCustomizeScreenKbLayout(p);
+//				selected++;
 				
 				if( item == selected )
 					showConfigMainMenu(p);

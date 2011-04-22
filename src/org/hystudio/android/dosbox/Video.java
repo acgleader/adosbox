@@ -10,6 +10,8 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL10;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -360,11 +362,19 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 			mParent.showScreenKeyboard("", false);
 		else if (keyCode == KeyEvent.KEYCODE_SEARCH)
 			mParent.showSDLSettings();
-		else if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed)
-			nativeKey(KeyEvent.KEYCODE_SEMICOLON, 1);
-		else {
+		else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+			AudioManager am = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
+			am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+			AudioManager am = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
+			am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+		} else {
 			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
 				shiftPressed = true;
+			
+			if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed)
+				nativeKey(KeyEvent.KEYCODE_SEMICOLON, 1); // Translate android colon(shift + .) to SDL colon (shift + ;)
+			
 			nativeKey(keyCode, 1);
 		}
 		return true;
@@ -372,17 +382,20 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
+			shiftPressed = false;
+		else if (keyCode == KeyEvent.KEYCODE_MENU || 
+			keyCode == KeyEvent.KEYCODE_SEARCH ||
+			keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
+			keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+			return true;
+			
 		if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed) {
 			nativeKey(KeyEvent.KEYCODE_SEMICOLON, 0);
 			return true;
 		}
 		
-		if (keyCode != KeyEvent.KEYCODE_MENU && keyCode != KeyEvent.KEYCODE_SEARCH) {
-			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
-				shiftPressed = false;
-			
-			nativeKey(keyCode, 0);
-		}
+		nativeKey(keyCode, 0);
 		return true;
 	}
 

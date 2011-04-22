@@ -3,7 +3,13 @@ Build instructions
 unpack dosbox-0.74-cfg-pelyaSDL.tar.gz into ~/commandergenius/project/jni/application
 Download http://sourceforge.net/projects/dosbox/files/dosbox/0.74/dosbox-0.74.tar.gz/download
 unpack dosbox-0.74.tar.gz into ~/commandergenius/project/jni/application/dosbox
-apply patch dosbox-0.74-androidSDL.diff
+apply 
+patch -p0 > dosbox-0.74-androidSDL.diff
+after configure, make the following change in config.h  
+#define C_TARGETCPU UNKNOWN
+to
+#define C_TARGETCPU ARMV4LE 
+
 
 cd ~/commandergenius/project/jni/application
 rm src
