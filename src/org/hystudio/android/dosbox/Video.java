@@ -353,21 +353,36 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 			mRenderer.nativeGlContextRecreated();
 	};
 
+	private boolean shiftPressed = false;
 	@Override
 	public boolean onKeyDown(int keyCode, final KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU)
 			mParent.showScreenKeyboard("", false);
 		else if (keyCode == KeyEvent.KEYCODE_SEARCH)
 			mParent.showSDLSettings();
-		else 
+		else if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed)
+			nativeKey(KeyEvent.KEYCODE_SEMICOLON, 1);
+		else {
+			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
+				shiftPressed = true;
 			nativeKey(keyCode, 1);
+		}
 		return true;
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
-		if (keyCode != KeyEvent.KEYCODE_MENU && keyCode != KeyEvent.KEYCODE_SEARCH)
+		if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed) {
+			nativeKey(KeyEvent.KEYCODE_SEMICOLON, 0);
+			return true;
+		}
+		
+		if (keyCode != KeyEvent.KEYCODE_MENU && keyCode != KeyEvent.KEYCODE_SEARCH) {
+			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
+				shiftPressed = false;
+			
 			nativeKey(keyCode, 0);
+		}
 		return true;
 	}
 
