@@ -319,15 +319,13 @@ class Settings
 	
 	private static void writeFileToStorage(MainActivity p, String fileName) {
 		try {
-			File dir = new File(Globals.DataDir);
+			String destDir = Globals.DataDir + "/.dosbox/";
+			File dir = new File(destDir);
 			if (!dir.exists())
-				dir.mkdir();
-			dir = new File(Globals.DataDir + "/.dosbox/");
-			if (!dir.exists())
-				dir.mkdir();
+				dir.mkdirs();
 			
 			InputStream in = p.getAssets().open(fileName);
-			FileOutputStream out = new FileOutputStream(Globals.DataDir + "/.dosbox/"
+			FileOutputStream out = new FileOutputStream(destDir
 					+ fileName);
 			byte buf[] = new byte[1024];
 			int len;

@@ -4,7 +4,6 @@ package org.hystudio.android.dosbox;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-import android.util.Log;
 
 
 class AudioThread {
