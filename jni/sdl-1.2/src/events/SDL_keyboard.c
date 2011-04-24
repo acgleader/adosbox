@@ -21,6 +21,8 @@
 */
 #include "SDL_config.h"
 
+#include <android/log.h>
+
 /* General keyboard handling code for SDL */
 
 #include "SDL_timer.h"
@@ -405,8 +407,10 @@ int SDL_PrivateKeyboard(Uint8 state, SDL_keysym *keysym)
 	SDL_memset(&event, 0, sizeof(event));
 
 #if 0
-printf("The '%s' key has been %s\n", SDL_GetKeyName(keysym->sym), 
+	char message[500];
+	sprintf(message, "The '%s' key has been %s\n", SDL_GetKeyName(keysym->sym), 
 				state == SDL_PRESSED ? "pressed" : "released");
+	__android_log_print(ANDROID_LOG_INFO, "libSDL", message);
 #endif
 	/* Set up the keysym */
 	modstate = (Uint16)SDL_ModState;

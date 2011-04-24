@@ -1856,8 +1856,8 @@ JAVA_EXPORT_NAME(Settings_nativeInitKeymap) ( JNIEnv*  env, jobject thiz )
   keymap[KEYCODE_7] = SDL_KEY(7);
   keymap[KEYCODE_8] = SDL_KEY(8);
   keymap[KEYCODE_9] = SDL_KEY(9);
-  keymap[KEYCODE_STAR] = SDL_KEY(KP_DIVIDE);
-  keymap[KEYCODE_POUND] = SDL_KEY(KP_MULTIPLY);
+  keymap[KEYCODE_STAR] = SDL_KEY(ASTERISK);
+  keymap[KEYCODE_POUND] = SDL_KEY(HASH);
 
   keymap[KEYCODE_DPAD_UP] = SDL_KEY(UP);
   keymap[KEYCODE_DPAD_DOWN] = SDL_KEY(DOWN);
@@ -1902,8 +1902,8 @@ JAVA_EXPORT_NAME(Settings_nativeInitKeymap) ( JNIEnv*  env, jobject thiz )
   keymap[KEYCODE_SPACE] = SDL_KEY(SPACE);
   keymap[KEYCODE_DEL] = SDL_KEY(BACKSPACE);
   keymap[KEYCODE_GRAVE] = SDL_KEY(GRAVE);
-  keymap[KEYCODE_MINUS] = SDL_KEY(KP_MINUS);
-  keymap[KEYCODE_PLUS] = SDL_KEY(KP_PLUS);
+  keymap[KEYCODE_MINUS] = SDL_KEY(MINUS);
+  keymap[KEYCODE_PLUS] = SDL_KEY(PLUS);
   keymap[KEYCODE_EQUALS] = SDL_KEY(EQUALS);
   keymap[KEYCODE_LEFT_BRACKET] = SDL_KEY(LEFTBRACKET);
   keymap[KEYCODE_RIGHT_BRACKET] = SDL_KEY(RIGHTBRACKET);

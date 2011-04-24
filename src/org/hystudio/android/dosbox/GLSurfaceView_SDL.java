@@ -14,6 +14,7 @@ import javax.microedition.khronos.opengles.GL;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
+import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -885,7 +886,7 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                 mNeedStart = true;
                 mSizeChanged = true;
                 SwapBuffers();
-                SwapBuffers();
+//                SwapBuffers();
 
                 mRenderer.onDrawFrame(mGL);
 

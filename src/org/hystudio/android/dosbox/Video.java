@@ -356,6 +356,8 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	};
 
 	private boolean shiftPressed = false;
+	private boolean altPressed = false;
+	private boolean translated = false;
 	@Override
 	public boolean onKeyDown(int keyCode, final KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU)
@@ -369,33 +371,81 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 			AudioManager am = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
 			am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
 		} else {
-			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
+			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
 				shiftPressed = true;
+			if (keyCode == KeyEvent.KEYCODE_ALT_LEFT)
+				altPressed = true;
 			
 			if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed)
 				nativeKey(KeyEvent.KEYCODE_SEMICOLON, 1); // Translate android colon(shift + .) to SDL colon (shift + ;)
-			
-			nativeKey(keyCode, 1);
+			else if (keyCode == KeyEvent.KEYCODE_B && altPressed) {
+				nativeKey(KeyEvent.KEYCODE_ALT_LEFT, 0); 
+				translated = true;
+				// Translate android <(alt + b) to SDL colon (shift + ,)
+				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
+				nativeKey(KeyEvent.KEYCODE_COMMA, 1); 
+			} else if (keyCode == KeyEvent.KEYCODE_N && altPressed) {
+				nativeKey(KeyEvent.KEYCODE_ALT_LEFT, 0); 
+				translated = true;
+				// Translate android <(alt + n) to SDL colon (shift + .)
+				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
+				nativeKey(KeyEvent.KEYCODE_PERIOD, 1); 
+			} else if (keyCode == KeyEvent.KEYCODE_POUND) {
+				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
+				nativeKey(KeyEvent.KEYCODE_3, 1);
+			} else if (keyCode == KeyEvent.KEYCODE_STAR) {
+				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
+				nativeKey(KeyEvent.KEYCODE_8, 1);
+			} else if (keyCode == KeyEvent.KEYCODE_AT) {
+				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
+				nativeKey(KeyEvent.KEYCODE_2, 1);
+			}  else if (keyCode == KeyEvent.KEYCODE_PLUS) {
+				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
+				nativeKey(KeyEvent.KEYCODE_EQUALS, 1);
+			} else
+				nativeKey(keyCode, 1);
 		}
 		return true;
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)
+		if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
 			shiftPressed = false;
-		else if (keyCode == KeyEvent.KEYCODE_MENU || 
+		else if (keyCode == KeyEvent.KEYCODE_ALT_LEFT) {
+			altPressed = false;
+			if (translated) {
+				translated = false;
+				return true;
+			}
+		} else if (keyCode == KeyEvent.KEYCODE_MENU || 
 			keyCode == KeyEvent.KEYCODE_SEARCH ||
 			keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
 			keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
 			return true;
 			
-		if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed) {
+		if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed) 
 			nativeKey(KeyEvent.KEYCODE_SEMICOLON, 0);
-			return true;
-		}
-		
-		nativeKey(keyCode, 0);
+		else if (keyCode == KeyEvent.KEYCODE_B && altPressed) {
+			nativeKey(KeyEvent.KEYCODE_COMMA, 0); 
+			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
+		} else if (keyCode == KeyEvent.KEYCODE_N && altPressed) {
+			nativeKey(KeyEvent.KEYCODE_PERIOD, 0); 
+			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
+		} else if (keyCode == KeyEvent.KEYCODE_POUND) {
+			nativeKey(KeyEvent.KEYCODE_3, 0);
+			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
+		} else if (keyCode == KeyEvent.KEYCODE_STAR) {
+			nativeKey(KeyEvent.KEYCODE_8, 0);
+			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
+		} else if (keyCode == KeyEvent.KEYCODE_AT) {
+			nativeKey(KeyEvent.KEYCODE_2, 0);
+			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
+		} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
+			nativeKey(KeyEvent.KEYCODE_EQUALS, 0);
+			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
+		} else
+			nativeKey(keyCode, 0);
 		return true;
 	}
 
