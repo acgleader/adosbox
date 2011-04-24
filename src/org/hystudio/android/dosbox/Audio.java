@@ -4,6 +4,7 @@ package org.hystudio.android.dosbox;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.util.Log;
 
 
 class AudioThread {
@@ -33,8 +34,8 @@ class AudioThread {
 		{
 			//if( Globals.AudioBufferConfig == 0 ) // Gives too much spam to logcat, makes things worse
 			//	mAudio.flush();
-
-			mAudio.write( mAudioBuffer, 0, mVirtualBufSize );
+			
+			mAudio.write( mAudioBuffer, 0, mVirtualBufSize ); 
 		}
 		
 		return 1;
@@ -49,10 +50,10 @@ class AudioThread {
 					encoding = ( encoding == 1 ) ? AudioFormat.ENCODING_PCM_16BIT :
 													AudioFormat.ENCODING_PCM_8BIT;
 
-					mVirtualBufSize = bufSize;
-
 					if( AudioTrack.getMinBufferSize( rate, channels, encoding ) > bufSize )
 						bufSize = AudioTrack.getMinBufferSize( rate, channels, encoding );
+					
+					mVirtualBufSize = bufSize;
 
 					if(Globals.AudioBufferConfig != 0) {    // application's choice - use minimal buffer
 						bufSize = (int)((float)bufSize * (((float)(Globals.AudioBufferConfig - 1) * 2.5f) + 1.0f));
