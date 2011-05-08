@@ -2,7 +2,14 @@
 <resources>
     <string name="app_name">aDosBox</string>
 
-
+	<string name="keyboard">OnScreen Keyboard</string>
+	<string name="settings">SDL Settings</string>
+	<string name="joystick">OnScreen JoyStick</string>
+	<string name="quit_app">Quit</string>
+	<string name="ok_button">OK</string>
+	<string name="cancel_button">Cancel</string>
+	<string name="quit_confirmation_title">Are your sure you want to quit?</string>
+	
     <string name="init">Initializing</string>
     <string name="please_wait">Please wait while data is being downloaded</string>
 

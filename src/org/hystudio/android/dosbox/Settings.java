@@ -121,6 +121,11 @@ class Settings
 		} catch ( IOException e ) {};
 	}
 	
+	static void toggleJoyStick() {
+		nativeSetTouchscreenKeyboardUsed(Globals.AppUsesJoystick ? 1 : 0);
+		Globals.AppUsesJoystick = !Globals.AppUsesJoystick;
+	}
+	
 	/**
 	 * This function dynamically adjust system based on runtime user configuration.
 	 * Note: some configuration modification requires restart of the app.
@@ -142,7 +147,7 @@ class Settings
                        screenKbReallyUsed = true;
                if( screenKbReallyUsed )
                {
-                   nativeSetTouchscreenKeyboardUsed();
+                   nativeSetTouchscreenKeyboardUsed(1);
                    nativeSetupScreenKeyboard(  Globals.TouchscreenKeyboardSize,
                                                Globals.TouchscreenKeyboardTheme,
                                                Globals.AppTouchscreenKeyboardKeysAmountAutoFire,
@@ -1178,7 +1183,7 @@ class Settings
 		public KeyRemapToolMouseClick(MainActivity _p, boolean leftClick)
 		{
 			p = _p;
-			p.setText(p.getResources().getString(R.string.remap_hwkeys_press));
+			p.showMessage(p.getResources().getString(R.string.remap_hwkeys_press));
 			this.leftClick = leftClick;
 		}
 		
@@ -1484,7 +1489,7 @@ class Settings
 
 	static void showTouchPressureMeasurementTool(final MainActivity p)
 	{
-		p.setText(p.getResources().getString(R.string.measurepressure_touchplease));
+		p.showMessage(p.getResources().getString(R.string.measurepressure_touchplease));
 		p.touchListener = new TouchMeasurementTool(p);
 	}
 
@@ -1504,7 +1509,7 @@ class Settings
 		{
 			force.add(new Integer((int)(ev.getPressure() * 1000.0)));
 			radius.add(new Integer((int)(ev.getSize() * 1000.0)));
-			p.setText(p.getResources().getString(R.string.measurepressure_response, force.get(force.size()-1), radius.get(radius.size()-1)));
+			p.showMessage(p.getResources().getString(R.string.measurepressure_response, force.get(force.size()-1), radius.get(radius.size()-1)));
 			try {
 				Thread.sleep(10L);
 			} catch (InterruptedException e) { }
@@ -1541,7 +1546,7 @@ class Settings
 	
 	static void showRemapHwKeysConfig(final MainActivity p)
 	{
-		p.setText(p.getResources().getString(R.string.remap_hwkeys_press));
+		p.showMessage(p.getResources().getString(R.string.remap_hwkeys_press));
 		p.keyListener = new KeyRemapTool(p);
 	}
 
@@ -1813,7 +1818,7 @@ class Settings
 	
 	static void showCalibrateTouchscreenMenu(final MainActivity p)
 	{
-		p.setText(p.getResources().getString(R.string.calibrate_touchscreen_touch));
+		p.showMessage(p.getResources().getString(R.string.calibrate_touchscreen_touch));
 		Globals.TouchscreenCalibration[0] = 0;
 		Globals.TouchscreenCalibration[1] = 0;
 		Globals.TouchscreenCalibration[2] = 0;
@@ -1884,7 +1889,7 @@ class Settings
 
 	static void showCustomizeScreenKbLayout(final MainActivity p)
 	{
-		p.setText(p.getResources().getString(R.string.screenkb_custom_layout_help));
+		p.showMessage(p.getResources().getString(R.string.screenkb_custom_layout_help));
 		CustomizeScreenKbLayoutTool tool = new CustomizeScreenKbLayoutTool(p);
 		p.touchListener = tool;
 		p.keyListener = tool;
@@ -2117,7 +2122,7 @@ class Settings
 					screenKbReallyUsed = true;
 			if( screenKbReallyUsed )
 			{
-				nativeSetTouchscreenKeyboardUsed();
+				nativeSetTouchscreenKeyboardUsed(1);
 				nativeSetupScreenKeyboard(	Globals.TouchscreenKeyboardSize,
 											Globals.TouchscreenKeyboardTheme,
 											Globals.AppTouchscreenKeyboardKeysAmountAutoFire,
@@ -2203,7 +2208,7 @@ class Settings
 													int relativeMovement, int relativeMovementSpeed, int relativeMovementAccel);
 	private static native void nativeSetJoystickUsed();
 	private static native void nativeSetMultitouchUsed();
-	private static native void nativeSetTouchscreenKeyboardUsed();
+	private static native void nativeSetTouchscreenKeyboardUsed(int used);
 	private static native void nativeSetSmoothVideo();
 	private static native void nativeSetVideoMultithreaded();
 	private static native void nativeSetupScreenKeyboard(int size, int theme, int nbuttonsAutoFire, int transparency);

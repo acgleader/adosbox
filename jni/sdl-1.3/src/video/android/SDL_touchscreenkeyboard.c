@@ -620,9 +620,9 @@ JAVA_EXPORT_NAME(Settings_nativeSetupScreenKeyboard) ( JNIEnv*  env, jobject thi
 
 
 JNIEXPORT void JNICALL 
-JAVA_EXPORT_NAME(Settings_nativeSetTouchscreenKeyboardUsed) ( JNIEnv*  env, jobject thiz)
+JAVA_EXPORT_NAME(Settings_nativeSetTouchscreenKeyboardUsed) ( JNIEnv*  env, jobject thiz, jint used)
 {
-	SDL_ANDROID_isTouchscreenKeyboardUsed = 1;
+	SDL_ANDROID_isTouchscreenKeyboardUsed = used;
 }
 
 static int

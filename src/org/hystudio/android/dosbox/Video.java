@@ -253,17 +253,13 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	{
 		class Callback implements Runnable {
 			public MainActivity parent;
-			public String oldText;
-			public boolean sendBackspace;
 
 			public void run() {
-				parent.showScreenKeyboard(oldText, sendBackspace);
+				parent.showScreenKeyboard();
 			}
 		}
 		Callback cb = new Callback();
 		cb.parent = context;
-		cb.oldText = oldText;
-		cb.sendBackspace = (sendBackspace != 0);
 		context.runOnUiThread(cb);
 	}
 
@@ -360,11 +356,10 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	private boolean translated = false;
 	@Override
 	public boolean onKeyDown(int keyCode, final KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_MENU)
-			mParent.showScreenKeyboard("", false);
-		else if (keyCode == KeyEvent.KEYCODE_SEARCH)
-			mParent.showSDLSettings();
-		else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+//			showContextMenu();
+			return super.onKeyDown(keyCode, event);
+		} if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 			AudioManager am = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
 			am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
 		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
@@ -410,7 +405,9 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 
 	@Override
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			return super.onKeyUp(keyCode, event);
+		} if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
 			shiftPressed = false;
 		else if (keyCode == KeyEvent.KEYCODE_ALT_LEFT) {
 			altPressed = false;
