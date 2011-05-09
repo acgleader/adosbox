@@ -1,3 +1,31 @@
+/*
+ SDL - Simple DirectMedia Layer
+ Copyright (C) 1997-2011 Sam Lantinga
+ Java source code (C) 2009-2011 Sergii Pylypenko
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ There is a license exception for this particular file (Settings.java) -
+ you may modify it as you wish without releasing source code,
+ as long as the libraries in the binary package you're distributing
+ (typically libapplication.so and other closed-source libraries in your .apk file)
+ can be linked and executed without error against the SDL compiled
+ from the original source code. This implies that you may not modify Java-to-C
+ interface, otherwise you have to publish the source code with your changes.
+
+ This exception is here to permit you to replace a rather awkward SDL startup config dialog
+ with your own user-friendly version, possibly with lesser options and some help on them.
+ Also you may put your own logo in the startup screen instead of the "Powered by SDL" logo.
+
+ You may modify other Java files if needed to implement your custom startup config dialog
+ without publishing the source code, to a reasonable extent of course - if your modification
+ will make SDL work better, faster or more stable beyond the startup config dialog -
+ you still have to publish the source code with such change (and I don't care about
+ changes which will make SDL work worse, slower or less stable, you may keep them).
+ */
 package org.hystudio.android.dosbox;
 
 import java.io.File;
@@ -26,7 +54,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 
 // TODO: too much code here, split into multiple files, possibly auto-generated menus?
 class Settings
@@ -2019,13 +2046,13 @@ class Settings
 				p.getResources().getString(R.string.pointandclick_keepaspectratio),
 				p.getResources().getString(R.string.pointandclick_showcreenunderfinger2),
 				p.getResources().getString(R.string.video_smooth),
-				p.getResources().getString(R.string.video_separatethread),
+				//p.getResources().getString(R.string.video_separatethread),
 			};
 			boolean defaults2[] = { 
 				Globals.KeepAspectRatio,
 				Globals.ShowScreenUnderFinger,
 				Globals.SmoothVideo,
-				Globals.MultiThreadedVideo
+				//Globals.MultiThreadedVideo
 			};
 			items = items2;
 			defaults = defaults2;
@@ -2057,8 +2084,8 @@ class Settings
 					Globals.ShowScreenUnderFinger = isChecked;
 				if( item == 2 )
 					Globals.SmoothVideo = isChecked;
-				if( item == 3 )
-					Globals.MultiThreadedVideo = isChecked;
+//				if( item == 3 )
+//					Globals.MultiThreadedVideo = isChecked;
 			}
 		});
 		builder.setPositiveButton(p.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() 

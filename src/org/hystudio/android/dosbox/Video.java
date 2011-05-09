@@ -1,5 +1,16 @@
 package org.hystudio.android.dosbox;
 
+/*
+ SDL - Simple DirectMedia Layer
+ Copyright (C) 1997-2011 Sam Lantinga
+ Java source code (C) 2009-2011 Sergii Pylypenko
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ */
+
 import java.io.File;
 import java.lang.reflect.Method;
 
@@ -224,7 +235,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 																				// from
 																				// native
 																				// code
-		
+
 		context.onDestroy();
 	}
 
@@ -354,37 +365,46 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	private boolean shiftPressed = false;
 	private boolean altPressed = false;
 	private boolean translated = false;
+
 	@Override
 	public boolean onKeyDown(int keyCode, final KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
-//			showContextMenu();
+			// showContextMenu();
 			return super.onKeyDown(keyCode, event);
-		} if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-			AudioManager am = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
-			am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+		}
+		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+			AudioManager am = (AudioManager) getContext().getSystemService(
+					Context.AUDIO_SERVICE);
+			am.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+					AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
 		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-			AudioManager am = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
-			am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+			AudioManager am = (AudioManager) getContext().getSystemService(
+					Context.AUDIO_SERVICE);
+			am.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+					AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
 		} else {
 			if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
 				shiftPressed = true;
 			if (keyCode == KeyEvent.KEYCODE_ALT_LEFT)
 				altPressed = true;
-			
+
 			if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed)
-				nativeKey(KeyEvent.KEYCODE_SEMICOLON, 1); // Translate android colon(shift + .) to SDL colon (shift + ;)
+				nativeKey(KeyEvent.KEYCODE_SEMICOLON, 1); // Translate android
+															// colon(shift + .)
+															// to SDL colon
+															// (shift + ;)
 			else if (keyCode == KeyEvent.KEYCODE_B && altPressed) {
-				nativeKey(KeyEvent.KEYCODE_ALT_LEFT, 0); 
+				nativeKey(KeyEvent.KEYCODE_ALT_LEFT, 0);
 				translated = true;
 				// Translate android <(alt + b) to SDL colon (shift + ,)
 				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
-				nativeKey(KeyEvent.KEYCODE_COMMA, 1); 
+				nativeKey(KeyEvent.KEYCODE_COMMA, 1);
 			} else if (keyCode == KeyEvent.KEYCODE_N && altPressed) {
-				nativeKey(KeyEvent.KEYCODE_ALT_LEFT, 0); 
+				nativeKey(KeyEvent.KEYCODE_ALT_LEFT, 0);
 				translated = true;
 				// Translate android <(alt + n) to SDL colon (shift + .)
 				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
-				nativeKey(KeyEvent.KEYCODE_PERIOD, 1); 
+				nativeKey(KeyEvent.KEYCODE_PERIOD, 1);
 			} else if (keyCode == KeyEvent.KEYCODE_POUND) {
 				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
 				nativeKey(KeyEvent.KEYCODE_3, 1);
@@ -394,7 +414,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 			} else if (keyCode == KeyEvent.KEYCODE_AT) {
 				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
 				nativeKey(KeyEvent.KEYCODE_2, 1);
-			}  else if (keyCode == KeyEvent.KEYCODE_PLUS) {
+			} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
 				nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 1);
 				nativeKey(KeyEvent.KEYCODE_EQUALS, 1);
 			} else
@@ -407,7 +427,8 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	public boolean onKeyUp(int keyCode, final KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			return super.onKeyUp(keyCode, event);
-		} if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
+		}
+		if (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
 			shiftPressed = false;
 		else if (keyCode == KeyEvent.KEYCODE_ALT_LEFT) {
 			altPressed = false;
@@ -415,19 +436,19 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 				translated = false;
 				return true;
 			}
-		} else if (keyCode == KeyEvent.KEYCODE_MENU || 
-			keyCode == KeyEvent.KEYCODE_SEARCH ||
-			keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
-			keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+		} else if (keyCode == KeyEvent.KEYCODE_MENU
+				|| keyCode == KeyEvent.KEYCODE_SEARCH
+				|| keyCode == KeyEvent.KEYCODE_VOLUME_UP
+				|| keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
 			return true;
-			
-		if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed) 
+
+		if (keyCode == KeyEvent.KEYCODE_PERIOD && shiftPressed)
 			nativeKey(KeyEvent.KEYCODE_SEMICOLON, 0);
 		else if (keyCode == KeyEvent.KEYCODE_B && altPressed) {
-			nativeKey(KeyEvent.KEYCODE_COMMA, 0); 
+			nativeKey(KeyEvent.KEYCODE_COMMA, 0);
 			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
 		} else if (keyCode == KeyEvent.KEYCODE_N && altPressed) {
-			nativeKey(KeyEvent.KEYCODE_PERIOD, 0); 
+			nativeKey(KeyEvent.KEYCODE_PERIOD, 0);
 			nativeKey(KeyEvent.KEYCODE_SHIFT_LEFT, 0);
 		} else if (keyCode == KeyEvent.KEYCODE_POUND) {
 			nativeKey(KeyEvent.KEYCODE_3, 0);

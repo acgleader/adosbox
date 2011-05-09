@@ -1,3 +1,14 @@
+/*
+    SDL - Simple DirectMedia Layer
+    Copyright (C) 1997-2011 Sam Lantinga
+    Java source code (C) 2009-2011 Sergii Pylypenko
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+*/
+
 package org.hystudio.android.dosbox;
 
 import android.app.Activity;
