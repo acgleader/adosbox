@@ -537,7 +537,6 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
 					SDL_ANDROID_MainThreadPushMouseMotion(moveMouseWithKbX, moveMouseWithKbY);
 			}
 			else {
-				__android_log_print(ANDROID_LOG_INFO, "libSDL", "x:%d y:%d oldMouseX:%d, oldMouseY:%d", x, y, oldMouseX, oldMouseY);
 				SDL_PrivateMouseMotion(0, 1, x - oldMouseX, y - oldMouseY);
 				oldMouseX = x; oldMouseY = y;
 			}
