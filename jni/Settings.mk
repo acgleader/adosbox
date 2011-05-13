@@ -8,6 +8,8 @@ APP_AVAILABLE_STATIC_LIBS := jpeg png tremor freetype xerces ogg tremor vorbis f
 
 APP_ABI := armeabi
 
+APP_CPPFLAGS += -O3
+APP_OPTIM := release
 
 # The namespace in Java file, with dots replaced with underscores
 SDL_JAVA_PACKAGE_PATH := org_hystudio_android_dosbox
