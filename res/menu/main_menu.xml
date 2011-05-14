@@ -3,6 +3,7 @@
 		android:icon="@drawable/keyboard_menu" />
 	<item android:title="@string/settings" android:id="@+id/settings"
 		android:icon="@drawable/settings"></item>
+	<item android:title="@string/dosbox_settings" android:id="@+id/dosbox_settings"></item>
 	<item android:title="@string/joystick" android:id="@+id/joystick"
 		android:icon="@drawable/joystick"></item>
 	<item android:title="@string/quit_app" android:id="@+id/quit_app"
