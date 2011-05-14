@@ -314,7 +314,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
 				if( dist - multitouchGestureDist > distMaxDiff )
 				{
 					multitouchGestureKeyPressed[0] = 1;
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[0] );
+					//SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[0] );
 				}
 				else
 				if( multitouchGestureKeyPressed[0] )
@@ -325,7 +325,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
 				if( multitouchGestureDist - dist > distMaxDiff )
 				{
 					multitouchGestureKeyPressed[1] = 1;
-				SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[1] );
+					//SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[1] );
 				}
 				else
 				if( multitouchGestureKeyPressed[1] )
@@ -344,7 +344,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
 				if( angleDiff < -angleMaxDiff )
 				{
 					multitouchGestureKeyPressed[2] = 1;
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[2] );
+					//SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[2] );
 				}
 				else
 				if( multitouchGestureKeyPressed[2] )
@@ -355,7 +355,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
 				if( angleDiff > angleMaxDiff )
 				{
 					multitouchGestureKeyPressed[3] = 1;
-					SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[3] );
+					//SDL_ANDROID_MainThreadPushKeyboardKey( SDL_PRESSED, multitouchGestureKeycode[3] );
 				}
 				else
 				if( multitouchGestureKeyPressed[3] )
