@@ -108,6 +108,7 @@ public class DOSBoxSettings {
         TextView helpView = new TextView(p);
         helpView.setText("hint: >= 100, absolute value; < 100, percentage");
         helpView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
+        ll.addView(helpView);
         
         builder.setView(ll);
         AlertDialog dialog = builder.create();
