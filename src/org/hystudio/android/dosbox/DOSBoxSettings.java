@@ -3,10 +3,13 @@
  */
 package org.hystudio.android.dosbox;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnShowListener;
+import android.net.Uri;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -99,17 +102,17 @@ public class DOSBoxSettings {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT));
         ll.setOrientation(LinearLayout.VERTICAL);
-        
+
         final EditText cycleChangeET = new EditText(p);
         cycleChangeET.setSingleLine();
         cycleChangeET.setWidth(200);
         ll.addView(cycleChangeET);
-        
+
         TextView helpView = new TextView(p);
         helpView.setText("hint: >= 100, absolute value; < 100, percentage");
         helpView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
         ll.addView(helpView);
-        
+
         builder.setView(ll);
         AlertDialog dialog = builder.create();
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
@@ -122,7 +125,10 @@ public class DOSBoxSettings {
                   int cycleChange = Integer.valueOf(strCycleChange);
                   int max = 1000, min = 5;
                   if (cycleChange > max || cycleChange < min) {
-                    Toast.makeText(p, String.format("Entered value is not correct [%d-%d]", min, max), 2000).show();
+                    Toast.makeText(
+                        p,
+                        String.format("Entered value is not correct [%d-%d]",
+                            min, max), 2000).show();
                     return;
                   }
                   nativeSetCPUCycleUp(cycleChange);
@@ -148,17 +154,17 @@ public class DOSBoxSettings {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT));
         ll.setOrientation(LinearLayout.VERTICAL);
-        
+
         final EditText cycleChangeET = new EditText(p);
         cycleChangeET.setSingleLine();
         cycleChangeET.setWidth(200);
         ll.addView(cycleChangeET);
-        
+
         TextView helpView = new TextView(p);
         helpView.setText("hint: >= 100, absolute value; < 100, percentage");
         helpView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
         ll.addView(helpView);
-        
+
         builder.setView(ll);
         AlertDialog dialog = builder.create();
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
@@ -171,7 +177,10 @@ public class DOSBoxSettings {
                   int cycleChange = Integer.valueOf(strCycleChange);
                   int max = 1000, min = 5;
                   if (cycleChange > max || cycleChange < min) {
-                    Toast.makeText(p, String.format("Entered value is not correct [%d-%d]", min, max), 2000).show();
+                    Toast.makeText(
+                        p,
+                        String.format("Entered value is not correct [%d-%d]",
+                            min, max), 2000).show();
                     return;
                   }
                   nativeSetCPUCycleDown(cycleChange);
@@ -183,6 +192,19 @@ public class DOSBoxSettings {
             });
         dialog.show();
         return true;
+      }
+    });
+
+    final LinearLayout configSaveLL = (LinearLayout) dosboxSettingView
+        .findViewById(R.id.config_save_ll);
+    configSaveLL.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View arg0) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        Intent.createChooser(intent, "Choose where to save");
+        p.startActivityForResult(intent, p.SELECT_CONFIG);
       }
     });
 
@@ -272,4 +294,6 @@ public class DOSBoxSettings {
   private static native void nativeSetCPUCycleDown(int cycledown);
 
   private static native int nativeGetFrameskip();
+  
+  static native int nativeDOSExit();
 }

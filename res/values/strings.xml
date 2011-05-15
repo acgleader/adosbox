@@ -159,5 +159,6 @@
     <string name="frameskip_dec">Frameskip Dec</string>
     <string name="cpucycles_up">Cycle up</string>
     <string name="cpucycles_down">Cycle down</string>
+    <string name="config_save">Save config</string>
 
 </resources>

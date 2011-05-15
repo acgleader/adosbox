@@ -63,4 +63,7 @@
 			android:layout_height="wrap_content" android:id="@+id/frameskip_show_dec_tv"
 			android:textSize="26sp"></TextView>
 	</LinearLayout>
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/config_save_ll">
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/config_save_tv" android:text="@string/config_save" android:textSize="26sp"></TextView>
+	</LinearLayout>
 </LinearLayout>
