@@ -670,6 +670,13 @@ JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeDOS
     s->CMD_EXIT(NULL);
 }
 
+JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeDOSBoxWriteConfig
+  (JNIEnv *env, jclass, jstring name) {
+    jboolean iscopy;
+    const char *mfile = env->GetStringUTFChars(name, iscopy);
+    control->PrintConfig(mfile);
+}
+
 #ifdef __cplusplus
 }
 #endif
