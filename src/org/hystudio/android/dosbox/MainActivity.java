@@ -157,8 +157,9 @@ public class MainActivity extends Activity {
 					});
 			alertDialog.show();
 			return true;
-    case R.id.dosbox_settings:
-      return true;
+		case R.id.dosbox_settings:
+		  DOSBoxSettings.showConfigMainMenu(this);
+		  return true;
 		case R.id.joystick:
 			Settings.toggleJoyStick();
 			return true;
