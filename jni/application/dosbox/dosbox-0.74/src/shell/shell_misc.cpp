@@ -26,6 +26,7 @@
 #include "regs.h"
 #include "callback.h"
 #include "support.h"
+#include <android/log.h>
 
 void DOS_Shell::ShowPrompt(void) {
 	Bit8u drive=DOS_GetDefaultDrive()+'A';
@@ -327,10 +328,10 @@ void DOS_Shell::InputCommand(char * line) {
 				line[++str_len]=0;//new end (as the internal buffer moved one place to the right
 				size--;
 			};
-		   
+
 			line[str_index]=c;
 			str_index ++;
-			if (str_index > str_len){ 
+			if (str_index > str_len){
 				line[str_index] = '\0';
 				str_len++;
 				size--;
@@ -356,7 +357,7 @@ void DOS_Shell::InputCommand(char * line) {
 
 std::string full_arguments = "";
 bool DOS_Shell::Execute(char * name,char * args) {
-/* return true  => don't check for hardware changes in do_command 
+/* return true  => don't check for hardware changes in do_command
  * return false =>       check for hardware changes in do_command */
 	char fullname[DOS_PATHLENGTH+4]; //stores results from Which
 	char* p_fullname;
@@ -388,7 +389,8 @@ bool DOS_Shell::Execute(char * name,char * args) {
 	if (!p_fullname) return false;
 	strcpy(fullname,p_fullname);
 	const char* extension = strrchr(fullname,'.');
-	
+
+  __android_log_print(ANDROID_LOG_INFO, "dosbox", "command fullname:%s", fullname);
 	/*always disallow files without extension from being executed. */
 	/*only internal commands can be run this way and they never get in this handler */
 	if(extension == 0)
@@ -397,46 +399,46 @@ bool DOS_Shell::Execute(char * name,char * args) {
 		if(strlen(fullname) >( DOS_PATHLENGTH - 1) ) return false;
 		char temp_name[DOS_PATHLENGTH+4],* temp_fullname;
 		//try to add .com, .exe and .bat extensions to filename
-		
+
 		strcpy(temp_name,fullname);
 		strcat(temp_name,".COM");
 		temp_fullname=Which(temp_name);
 		if (temp_fullname) { extension=".com";strcpy(fullname,temp_fullname); }
 
-		else 
+		else
 		{
 			strcpy(temp_name,fullname);
 			strcat(temp_name,".EXE");
 			temp_fullname=Which(temp_name);
 		 	if (temp_fullname) { extension=".exe";strcpy(fullname,temp_fullname);}
 
-			else 
+			else
 			{
 				strcpy(temp_name,fullname);
 				strcat(temp_name,".BAT");
 				temp_fullname=Which(temp_name);
 		 		if (temp_fullname) { extension=".bat";strcpy(fullname,temp_fullname);}
 
-				else  
+				else
 				{
 		 			return false;
 				}
-			
-			}	
+
+			}
 		}
 	}
-	
-	if (strcasecmp(extension, ".bat") == 0) 
+
+	if (strcasecmp(extension, ".bat") == 0)
 	{	/* Run the .bat file */
 		/* delete old batch file if call is not active*/
 		bool temp_echo=echo; /*keep the current echostate (as delete bf might change it )*/
 		if(bf && !call) delete bf;
 		bf=new BatchFile(this,fullname,name,line);
 		echo=temp_echo; //restore it.
-	} 
-	else 
+	}
+	else
 	{	/* only .bat .exe .com extensions maybe be executed by the shell */
-		if(strcasecmp(extension, ".com") !=0) 
+		if(strcasecmp(extension, ".com") !=0)
 		{
 			if(strcasecmp(extension, ".exe") !=0) return false;
 		}
@@ -549,7 +551,7 @@ char * DOS_Shell::Which(char * name) {
 
 		if(i_path == DOS_PATHLENGTH) {
 			/* If max size. move till next ; and terminate path */
-			while(*pathenv != ';') 
+			while(*pathenv != ';')
 				pathenv++;
 			path[DOS_PATHLENGTH - 1] = 0;
 		} else path[i_path] = 0;
@@ -560,7 +562,7 @@ char * DOS_Shell::Which(char * name) {
 			if(len >= (DOS_PATHLENGTH - 2)) continue;
 
 			if(path[len - 1] != '\\') {
-				strcat(path,"\\"); 
+				strcat(path,"\\");
 				len++;
 			}
 

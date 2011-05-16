@@ -674,7 +674,11 @@ JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeDOS
   (JNIEnv *env, jclass, jstring name) {
     jboolean iscopy;
     const char *mfile = env->GetStringUTFChars(name, &iscopy);
-    control->PrintConfig(mfile);
+  //   control->PrintConfig(mfile);
+    char com[128] = {0};
+    snprintf(com, 128, "config -writeconf \"%s\"", mfile);
+    DOS_Shell *control = static_cast<DOS_Shell *>(first_shell);
+    control->DoCommand(com);
 }
 
 #ifdef __cplusplus

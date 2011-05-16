@@ -641,11 +641,31 @@ extern "C" {
 JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeFrameskipIncrease
   (JNIEnv *, jclass) {
     IncreaseFrameSkip(true);
+
+    Section_prop *renderSec = ((Section_prop*)control->GetSection("render"));
+    Prop_int* frameskipProp = renderSec->Get_int_prop("frameskip");
+    if (frameskipProp == NULL) {
+      frameskipProp = renderSec->Add_int("frameskip", Property::Changeable::Always, render.frameskip.max);
+    } else {
+      char str[10];
+      snprintf(str, 9, "%d", render.frameskip.max);
+      frameskipProp->SetValue(str);;
+    }
 }
 
 JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeFrameskipDecrease
   (JNIEnv *, jclass) {
     DecreaseFrameSkip(true);
+
+    Section_prop *renderSec = ((Section_prop*)control->GetSection("render"));
+    Prop_int* frameskipProp = renderSec->Get_int_prop("frameskip");
+    if (frameskipProp == NULL) {
+      frameskipProp = renderSec->Add_int("frameskip", Property::Changeable::Always, render.frameskip.max);
+    } else {
+      char str[10];
+      snprintf(str, 9, "%d", render.frameskip.max);
+      frameskipProp->SetValue(str);;
+    }
 }
 
 

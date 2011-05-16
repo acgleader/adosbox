@@ -2424,9 +2424,16 @@ bool CPU::inited=false;
 
 #ifndef _Included_org_hystudio_android_dosbox_DOSBoxSettings_CPU
 #define _Included_org_hystudio_android_dosbox_DOSBoxSettings_CPU
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "control.h"
+#include "shell.h"
+#include "setup.h"
+#include <android/log.h>
+
 /*
  * Class:     org_hystudio_android_dosbox_DOSBoxSettings
  * Method:    nativeCPUCycleIncrease
@@ -2434,9 +2441,24 @@ extern "C" {
  */
 JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeCPUCycleIncrease
   (JNIEnv *, jclass) {
-  CPU_CycleIncrease(true);
-}
+/*
+    CPU_CycleIncrease(true);
+    char com[128] = {0};
+    // snprintf(com, 128, "config -set \"cpu cycles=%d\"", CPU_CycleMax);
+    snprintf(com, 128, "config");
+    DOS_Shell *control = static_cast<DOS_Shell *>(first_shell);
+    // control->DoCommand(com);
+    control->ParseLine(com);
+    return;
+ */
 
+  CPU_CycleIncrease(true);
+  char str[10];
+  snprintf(str, 9, "%d", CPU_CycleMax);
+  Prop_multival* cpucycleProp =
+    ((Section_prop*)control->GetSection("cpu"))->Get_multival("cycles");
+  cpucycleProp->SetValue(str);
+}
 
 /*
  * Class:     org_hystudio_android_dosbox_DOSBoxSettings
@@ -2446,6 +2468,21 @@ JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeCPU
 JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeCPUCycleDecrease
   (JNIEnv *, jclass) {
   CPU_CycleDecrease(true);
+/*
+  char com[128] = {0};
+  // snprintf(com, 128, "config -set \"cpu cycles=%d\"", CPU_CycleMax);
+  snprintf(com, 128, "config");
+  DOS_Shell *control = static_cast<DOS_Shell *>(first_shell);
+  // control->DoCommand(com);
+    control->ParseLine(com);
+  return;
+  */
+
+  char str[10];
+  snprintf(str, 9, "%d", CPU_CycleMax);
+  Prop_multival* cpucycleProp =
+    ((Section_prop*)control->GetSection("cpu"))->Get_multival("cycles");
+  cpucycleProp->SetValue(str);
 }
 
 
@@ -2467,11 +2504,31 @@ JNIEXPORT int JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeGetC
 JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeSetCPUCycleUp
   (JNIEnv *, jclass, jint cycleup) {
   CPU_CycleUp = cycleup;
+
+  Section_prop *cpuSec = ((Section_prop*)control->GetSection("cpu"));
+  Prop_int* cycleupProp = cpuSec->Get_int_prop("cycleup");
+  if (cycleupProp == NULL) {
+    cycleupProp = cpuSec->Add_int("cycleup", Property::Changeable::Always, CPU_CycleUp);
+  } else {
+    char str[10];
+    snprintf(str, 9, "%d", CPU_CycleUp);
+    cycleupProp->SetValue(str);;
+  }
 }
 
 JNIEXPORT void JNICALL Java_org_hystudio_android_dosbox_DOSBoxSettings_nativeSetCPUCycleDown
   (JNIEnv *, jclass, jint cycledown) {
   CPU_CycleDown = cycledown;
+
+  Section_prop *cpuSec = ((Section_prop*)control->GetSection("cpu"));
+  Prop_int* cycledownProp = cpuSec->Get_int_prop("cycledown");
+  if (cycledownProp == NULL) {
+    cycledownProp = cpuSec->Add_int("cycleup", Property::Changeable::Always, CPU_CycleDown);
+  } else {
+    char str[10];
+    snprintf(str, 9, "%d", CPU_CycleDown);
+    cycledownProp->SetValue(str);;
+  }
 }
 
 #ifdef __cplusplus
