@@ -1,69 +1,82 @@
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content" android:layout_height="wrap_content"
-	android:id="@+id/dosbox_settings_ll" android:orientation="vertical"
-	android:layout_marginLeft="10px" android:layout_marginRight="10px">
-	<LinearLayout android:layout_height="wrap_content"
-		android:id="@+id/cyclechange_up_ll" android:layout_width="match_parent">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textSize="26sp"
-			android:layout_weight="1" android:id="@+id/cpucycle_up_tv"
-			android:text="@string/cpucycles_up"></TextView>
-		<TextView android:id="@+id/cpucycleup_show_tv"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="26sp"></TextView>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/scroll" android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:scrollbarAlwaysDrawVerticalTrack="true" android:scrollbars="vertical" android:scrollbarFadeDuration="0">
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/dosbox_settings_ll" android:orientation="vertical"
+		android:layout_marginLeft="10px" android:layout_marginRight="10px">
+		<LinearLayout android:layout_height="wrap_content"
+			android:id="@+id/cyclechange_up_ll" android:layout_width="match_parent">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textSize="26sp"
+				android:layout_weight="1" android:id="@+id/cpucycle_up_tv"
+				android:text="@string/cpucycles_up"></TextView>
+			<TextView android:id="@+id/cpucycleup_show_tv"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_height="wrap_content"
+			android:id="@+id/cyclechange_down_ll" android:layout_width="match_parent">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textSize="26sp"
+				android:layout_weight="1" android:id="@+id/cpucycle_down_tv"
+				android:text="@string/cpucycles_down"></TextView>
+			<TextView android:id="@+id/cpucycledown_show_tv"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/cpucycle_inc_ll">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/cpucycleinc_tv"
+				android:text="@string/cpucycle_increase" android:textSize="26sp"
+				android:layout_weight="1"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/cpucycleshow_inc_tv"
+				android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/cpucycle_dec_ll">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/cpucycledec_tv"
+				android:text="@string/cpucycle_decrease" android:textSize="26sp"
+				android:layout_weight="1"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/cpucycleshow_dec_tv"
+				android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/frameskip_inc_ll">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textSize="26sp"
+				android:layout_weight="1" android:text="@string/frameskip_inc"
+				android:id="@+id/frameskip_inc_tv"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/frameskip_show_inc_tv"
+				android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/frameskip_dec_ll">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textSize="26sp"
+				android:layout_weight="1" android:text="@string/frameskip_dec"
+				android:id="@+id/frameskip_dec_tv"></TextView>
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/frameskip_show_dec_tv"
+				android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/config_load_ll">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/config_load_tv"
+				android:text="@string/config_load" android:textSize="26sp"></TextView>
+		</LinearLayout>
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/config_save_ll">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/config_save_tv"
+				android:text="@string/config_save" android:textSize="26sp"></TextView>
+		</LinearLayout>
 	</LinearLayout>
-	<LinearLayout android:layout_height="wrap_content"
-		android:id="@+id/cyclechange_down_ll" android:layout_width="match_parent">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textSize="26sp"
-			android:layout_weight="1" android:id="@+id/cpucycle_down_tv"
-			android:text="@string/cpucycles_down"></TextView>
-		<TextView android:id="@+id/cpucycledown_show_tv"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="26sp"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent"
-		android:layout_height="wrap_content" android:id="@+id/cpucycle_inc_ll">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/cpucycleinc_tv"
-			android:text="@string/cpucycle_increase" android:textSize="26sp"
-			android:layout_weight="1"></TextView>
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/cpucycleshow_inc_tv"
-			android:textSize="26sp"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent"
-		android:layout_height="wrap_content" android:id="@+id/cpucycle_dec_ll">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/cpucycledec_tv"
-			android:text="@string/cpucycle_decrease" android:textSize="26sp"
-			android:layout_weight="1"></TextView>
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/cpucycleshow_dec_tv"
-			android:textSize="26sp"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent"
-		android:layout_height="wrap_content" android:id="@+id/frameskip_inc_ll">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textSize="26sp"
-			android:layout_weight="1" android:text="@string/frameskip_inc"
-			android:id="@+id/frameskip_inc_tv"></TextView>
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/frameskip_show_inc_tv"
-			android:textSize="26sp"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent"
-		android:layout_height="wrap_content" android:id="@+id/frameskip_dec_ll">
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textSize="26sp"
-			android:layout_weight="1" android:text="@string/frameskip_dec"
-			android:id="@+id/frameskip_dec_tv"></TextView>
-		<TextView android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/frameskip_show_dec_tv"
-			android:textSize="26sp"></TextView>
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/config_save_ll">
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/config_save_tv" android:text="@string/config_save" android:textSize="26sp"></TextView>
-	</LinearLayout>
-</LinearLayout>
+</ScrollView>
