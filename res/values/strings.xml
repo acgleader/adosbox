@@ -152,14 +152,14 @@
     <string name="video_separatethread">Separate thread for video, will increase FPS on some devices</string>
 
     <string name="text_edit_click_here">Tap to start typing, press Back when done</string>
-    <string name="cpucycle_increase">Increase CPU cycle</string>
-    <string name="cpucycle_decrease">Decrease CPU cycles</string>
-    <string name="frameskip_inc">Frameskip Inc</string>
-    <string name="cpucycles_change">CPU cycle change</string>
-    <string name="frameskip_dec">Frameskip Dec</string>
-    <string name="cpucycles_up">Cycle up</string>
-    <string name="cpucycles_down">Cycle down</string>
-    <string name="config_save">Save config</string>
-    <string name="config_load">Load config</string>
+    <string name="cpucycle_change">CPU cycle</string>
+    <string name="frameskip_change">Frameskip</string>
+    <string name="cpucycles_change_step">Cycle change step</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="config">Save config</string>
+    
+    <string name="load">Load</string>
+    <string name="save">Save</string>
 
 </resources>

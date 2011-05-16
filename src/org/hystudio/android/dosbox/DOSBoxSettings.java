@@ -13,13 +13,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
+import android.text.InputType;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -51,9 +52,9 @@ public class DOSBoxSettings {
         .findViewById(R.id.scroll);
     scrollView.setScrollbarFadingEnabled(false);
 
-    final LinearLayout cpuIncLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.cpucycle_inc_ll);
-    cpuIncLL.setOnClickListener(new OnClickListener() {
+    final Button cpuIncBt = (Button) dosboxSettingView
+        .findViewById(R.id.cycle_inc_bt);
+    cpuIncBt.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View paramView) {
         increaseCPUCycles(p);
@@ -61,9 +62,9 @@ public class DOSBoxSettings {
       }
     });
 
-    final LinearLayout cpuDecLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.cpucycle_dec_ll);
-    cpuDecLL.setOnClickListener(new OnClickListener() {
+    final Button cpuDecBt = (Button) dosboxSettingView
+        .findViewById(R.id.cycle_dec_bt);
+    cpuDecBt.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View paramView) {
         decreaseCPUCycles(p);
@@ -71,9 +72,9 @@ public class DOSBoxSettings {
       }
     });
 
-    final LinearLayout frameskipIncLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.frameskip_inc_ll);
-    frameskipIncLL.setOnClickListener(new OnClickListener() {
+    final Button frameskipIncBt = (Button) dosboxSettingView
+        .findViewById(R.id.frameskip_inc_bt);
+    frameskipIncBt.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View paramView) {
         increaseFrameskip(p);
@@ -81,9 +82,9 @@ public class DOSBoxSettings {
       }
     });
 
-    final LinearLayout frameskipDecLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.frameskip_dec_ll);
-    frameskipDecLL.setOnClickListener(new OnClickListener() {
+    final Button frameskipDecBt = (Button) dosboxSettingView
+        .findViewById(R.id.frameskip_dec_bt);
+    frameskipDecBt.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View paramView) {
         decreaseFrameskip(p);
@@ -92,11 +93,11 @@ public class DOSBoxSettings {
     });
 
     // CPU cycle change
-    final LinearLayout cpuCycleUpLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.cyclechange_up_ll);
-    cpuCycleUpLL.setOnLongClickListener(new OnLongClickListener() {
+    final Button cpuCycleUpBt = (Button) dosboxSettingView
+        .findViewById(R.id.cycleup_step_bt);
+    cpuCycleUpBt.setOnClickListener(new OnClickListener() {
       @Override
-      public boolean onLongClick(View paramView) {
+      public void onClick(View paramView) {
         AlertDialog.Builder builder = new AlertDialog.Builder(p);
         LinearLayout ll = new LinearLayout(p);
         ll.setLayoutParams(new LinearLayout.LayoutParams(
@@ -107,6 +108,7 @@ public class DOSBoxSettings {
         final EditText cycleChangeET = new EditText(p);
         cycleChangeET.setSingleLine();
         cycleChangeET.setWidth(200);
+        cycleChangeET.setInputType(InputType.TYPE_CLASS_NUMBER);
         ll.addView(cycleChangeET);
 
         TextView helpView = new TextView(p);
@@ -140,15 +142,14 @@ public class DOSBoxSettings {
               }
             });
         dialog.show();
-        return true;
       }
     });
 
-    final LinearLayout cpuCycleDownLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.cyclechange_down_ll);
-    cpuCycleDownLL.setOnLongClickListener(new OnLongClickListener() {
+    final Button cpuCycleDownBt = (Button) dosboxSettingView
+        .findViewById(R.id.cycledown_step_bt);
+    cpuCycleDownBt.setOnClickListener(new OnClickListener() {
       @Override
-      public boolean onLongClick(View paramView) {
+      public void onClick(View paramView) {
         AlertDialog.Builder builder = new AlertDialog.Builder(p);
         LinearLayout ll = new LinearLayout(p);
         ll.setLayoutParams(new LinearLayout.LayoutParams(
@@ -159,6 +160,7 @@ public class DOSBoxSettings {
         final EditText cycleChangeET = new EditText(p);
         cycleChangeET.setSingleLine();
         cycleChangeET.setWidth(200);
+        cycleChangeET.setInputType(InputType.TYPE_CLASS_NUMBER);
         ll.addView(cycleChangeET);
 
         TextView helpView = new TextView(p);
@@ -192,13 +194,12 @@ public class DOSBoxSettings {
               }
             });
         dialog.show();
-        return true;
       }
     });
 
-    final LinearLayout configSaveLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.config_save_ll);
-    configSaveLL.setOnClickListener(new OnClickListener() {
+    final Button configSaveBt = (Button) dosboxSettingView
+        .findViewById(R.id.config_save_bt);
+    configSaveBt.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View arg0) {
         // TODO: to implement a file chooser
@@ -209,15 +210,15 @@ public class DOSBoxSettings {
         // p.startActivityForResult(intent, p.SELECT_CONFIG);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(p);
-        
+
         ScrollView sv = new ScrollView(p);
         sv.setLayoutParams(new ScrollView.LayoutParams(
             ScrollView.LayoutParams.WRAP_CONTENT,
             ScrollView.LayoutParams.WRAP_CONTENT));
-        
+
         sv.setScrollbarFadingEnabled(false);
         LinearLayout ll = new LinearLayout(p);
-        
+
         ll.setLayoutParams(new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -259,7 +260,8 @@ public class DOSBoxSettings {
               public void onClick(DialogInterface paramDialogInterface,
                   int paramInt) {
                 String filename = filenameET.getText().toString();
-                final File file = new File(Settings.getDOSBoxConfDir(), filename);
+                final File file = new File(Settings.getDOSBoxConfDir(),
+                    filename);
                 if (file.exists()) {
                   AlertDialog.Builder builder = new AlertDialog.Builder(p);
                   builder.setTitle("Overwrite exisint file?");
@@ -286,9 +288,9 @@ public class DOSBoxSettings {
       }
     });
 
-    final LinearLayout configLoadLL = (LinearLayout) dosboxSettingView
-        .findViewById(R.id.config_load_ll);
-    configLoadLL.setOnClickListener(new OnClickListener() {
+    final Button configLoadBt = (Button) dosboxSettingView
+        .findViewById(R.id.config_load_bt);
+    configLoadBt.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View arg0) {
         chooseConfigFile(p);
@@ -311,32 +313,26 @@ public class DOSBoxSettings {
     String absFileName = file.getAbsolutePath();
     nativeDOSBoxWriteConfig(absFileName);
   }
-  
+
   private static void updateView(ViewGroup dosboxSettingView) {
-    TextView incTV = (TextView) dosboxSettingView
-        .findViewById(R.id.cpucycleshow_inc_tv);
-    TextView decTV = (TextView) dosboxSettingView
-        .findViewById(R.id.cpucycleshow_dec_tv);
-    TextView cycleUpTV = (TextView) dosboxSettingView
-        .findViewById(R.id.cpucycleup_show_tv);
-    TextView cycleDownTV = (TextView) dosboxSettingView
-        .findViewById(R.id.cpucycledown_show_tv);
-    TextView frameskipIncTV = (TextView) dosboxSettingView
-        .findViewById(R.id.frameskip_show_inc_tv);
-    TextView frameskipDecTV = (TextView) dosboxSettingView
-        .findViewById(R.id.frameskip_show_dec_tv);
+    TextView cycleTV = (TextView) dosboxSettingView
+        .findViewById(R.id.cpucycleshow_tv);
+    Button cycleUpBt = (Button) dosboxSettingView
+        .findViewById(R.id.cycleup_step_bt);
+    Button cycleDownBt = (Button) dosboxSettingView
+        .findViewById(R.id.cycledown_step_bt);
+    TextView frameskipTV = (TextView) dosboxSettingView
+        .findViewById(R.id.frameskip_show__tv);
 
     int cycles = nativeGetCPUCycle();
     int cycleUp = nativeGetCPUCycleUp();
     int cycleDown = nativeGetCPUCycleDown();
     int frameskip = nativeGetFrameskip();
 
-    incTV.setText(cycles + "");
-    decTV.setText(cycles + "");
-    cycleUpTV.setText(cycleUp + "");
-    cycleDownTV.setText(cycleDown + "");
-    frameskipIncTV.setText(frameskip + "");
-    frameskipDecTV.setText(frameskip + "");
+    cycleTV.setText(cycles + "");
+    cycleUpBt.setText("\u21e7(" + cycleUp + ")");
+    cycleDownBt.setText("\u21e9(" + cycleDown + ")");
+    frameskipTV.setText(frameskip + "");
   }
 
   private static void increaseCPUCycles(Context p) {
@@ -360,18 +356,20 @@ public class DOSBoxSettings {
   private static void chooseConfigFile(final Activity p) {
     final List<File> configFiles = listConfigFiles();
     if (configFiles == null) {
-      Toast.makeText(p, "No config file is found. SD card is busy?", 3000).show();
+      Toast.makeText(p, "No config file is found. SD card is busy?", 3000)
+          .show();
       return;
     }
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
     final String[] filenames = new String[configFiles.size()];
     int idxSelected = -1;
     for (int i = 0; i < configFiles.size(); ++i) {
-      if (configFiles.get(i).getAbsolutePath().equals(Settings.dosboxConfFileFullPath))
-        idxSelected =i ;
+      if (configFiles.get(i).getAbsolutePath().equals(
+          Settings.dosboxConfFileFullPath))
+        idxSelected = i;
       filenames[i] = configFiles.get(i).getName();
     }
-    
+
     builder.setTitle("Select config file");
     builder.setSingleChoiceItems(filenames, idxSelected,
         new DialogInterface.OnClickListener() {
@@ -387,7 +385,7 @@ public class DOSBoxSettings {
           Toast.makeText(p, "You have not choosen any file", 2000).show();
           return;
         }
-        
+
         String oldCmdLine = Globals.CommandLine;
         Globals.CommandLine = "dosbox -conf " + configFileChoosed;
         Settings.Save(p);
@@ -402,7 +400,7 @@ public class DOSBoxSettings {
     });
     builder.show();
   }
-  
+
   private static List<File> listConfigFiles() {
     String strDestDir = Settings.getDOSBoxConfDir();
     File destDir = new File(strDestDir);
